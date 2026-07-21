@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人才内部活水匹配平台</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- ===================== 登录页 ===================== -->
+  <div id="loginPage" class="login-page">
+    <div class="login-bg-shapes">
+      <span class="shape shape-1"></span>
+      <span class="shape shape-2"></span>
+      <span class="shape shape-3"></span>
+    </div>
+    <div class="login-card">
+      <div class="login-logo">
+        <svg viewBox="0 0 48 48" width="48" height="48" fill="none">
+          <rect x="4" y="4" width="40" height="40" rx="12" fill="#A8C4D4" opacity="0.2"/>
+          <path d="M24 10c-4 0-7 3-7 7v3h-2v16h18V20h-2v-3c0-4-3-7-7-7zm0 3c2.2 0 4 1.8 4 4v3h-8v-3c0-2.2 1.8-4 4-4zm0 13c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" fill="#5B8FA8"/>
+        </svg>
+        <h1>人才内部活水匹配平台</h1>
+        <p>Talent Mobility & Matching Platform</p>
+      </div>
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label>用户名</label>
+          <input type="text" id="loginUser" placeholder="请输入用户名" value="admin">
+        </div>
+        <div class="form-group">
+          <label>密码</label>
+          <input type="password" id="loginPass" placeholder="请输入密码" value="admin123">
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <button type="submit" class="btn btn-primary btn-block">登 录</button>
+        <div class="login-hint">
+          <span>演示账号：admin / admin123</span>
+          <span style="margin-left:12px;cursor:pointer;text-decoration:underline;color:var(--primary)" onclick="App.resetData()">数据异常? 点击重置</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== 角色选择页 ===================== -->
+  <div id="roleSelectPage" class="role-select-page hidden">
+    <div class="role-select-header">
+      <h2>选择您的角色</h2>
+      <p>不同角色拥有不同的功能视角，您可以随时切换</p>
+    </div>
+    <div class="role-cards">
+      <div class="role-card" data-role="employee">
+        <div class="role-card-icon" style="background:#EDF4F8;color:#5B8FA8">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>员工端</h3>
+        <p>人才发现与申请中心</p>
+        <ul>
+          <li>智能推荐 & 猜你喜欢</li>
+          <li>内部机会广场</li>
+          <li>个人活水档案</li>
+          <li>申请进度追踪</li>
+        </ul>
+        <button class="btn btn-primary btn-block">进入员工端</button>
+      </div>
+      <div class="role-card" data-role="manager">
+        <div class="role-card-icon" style="background:#E8F6EE;color:#4CAF7C">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>业务管理端</h3>
+        <p>需求发布与人才选拔</p>
+        <ul>
+          <li>岗位发布工作台</li>
+          <li>智能人才库 & 雷达</li>
+          <li>候选人管理</li>
+          <li>协同面试评价</li>
+        </ul>
+        <button class="btn btn-primary btn-block">进入管理端</button>
+      </div>
+      <div class="role-card" data-role="admin">
+        <div class="role-card-icon" style="background:#FDF3E2;color:#E8A838">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        </div>
+        <h3>管理驾驶舱</h3>
+        <p>运营中心与数据洞察</p>
+        <ul>
+          <li>活水健康度仪表盘</li>
+          <li>人才流动热力图</li>
+          <li>规则配置中心</li>
+          <li>运营促活工具</li>
+        </ul>
+        <button class="btn btn-primary btn-block">进入驾驶舱</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 主应用 ===================== -->
+  <div id="app" class="app hidden">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-title" id="topbarTitle">首页</div>
+        <div class="topbar-actions">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="globalSearch" placeholder="搜索人才 / 岗位...">
+          </div>
+          <button class="icon-btn" id="btnNotifications" title="通知">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge-dot" id="notifBadge"></span>
+          </button>
+        </div>
+      </header>
+      <div id="viewContainer" class="content-scroll"></div>
+    </main>
+  </div>
+
+  <!-- ===================== 通用弹窗 ===================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalBox">
+      <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ===================== Toast ===================== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ===================== 通知抽屉 ===================== -->
+  <div class="notif-drawer" id="notifDrawer">
+    <div class="notif-drawer-header">
+      <h3>消息通知</h3>
+      <button class="notif-close" id="notifClose">&times;</button>
+    </div>
+    <div class="notif-drawer-body" id="notifBody"></div>
+  </div>
+  <div class="notif-overlay" id="notifOverlay"></div>
+
+  <!-- ===================== Scripts ===================== -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/employee.js"></script>
+  <script src="js/manager.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

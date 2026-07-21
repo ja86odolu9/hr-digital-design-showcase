@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【第X组】人力资源管理数字化设计项目展示</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===================== CSS 变量（沿用活水平台色系） ===================== */
+    :root {
+      --primary: #A8C4D4;
+      --primary-dark: #7FA8BE;
+      --primary-darker: #5B8FA8;
+      --primary-light: #D4E5EE;
+      --primary-lighter: #EDF4F8;
+      --primary-bg: #F5F9FB;
+      --success: #4CAF7C;
+      --success-light: #E8F6EE;
+      --warning: #E8A838;
+      --warning-light: #FDF3E2;
+      --danger: #E5655E;
+      --danger-light: #FCEAE9;
+      --info: #6BAED6;
+      --info-light: #E8F2FA;
+      --purple: #9B8FD4;
+      --purple-light: #EFEDF8;
+      --text-primary: #1A2B3C;
+      --text-secondary: #5A6B7D;
+      --text-muted: #8A99A8;
+      --text-white: #FFFFFF;
+      --border: #E2E8ED;
+      --border-light: #EDF1F5;
+      --bg-body: #F0F4F7;
+      --bg-card: #FFFFFF;
+      --bg-hover: #F5F9FB;
+      --shadow-sm: 0 1px 3px rgba(91, 143, 168, 0.06);
+      --shadow-md: 0 4px 12px rgba(91, 143, 168, 0.08);
+      --shadow-lg: 0 8px 30px rgba(91, 143, 168, 0.12);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===================== 基础重置 ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 14px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-body); color: var(--text-primary); line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===================== Hero 区域（登录页风格渐变 + 浮动装饰） ===================== */
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #EDF4F8 0%, #D4E5EE 50%, #C5DCE8 100%);
+      padding: 64px 24px 56px; text-align: center;
+    }
+    .hero-shapes { position: absolute; inset: 0; pointer-events: none; }
+    .hero-shapes .shape { position: absolute; border-radius: 50%; background: rgba(168, 196, 212, 0.15); animation: floatShape 8s ease-in-out infinite; }
+    .shape-1 { width: 300px; height: 300px; top: -80px; left: -60px; }
+    .shape-2 { width: 200px; height: 200px; bottom: -40px; right: 10%; animation-delay: 2s; }
+    .shape-3 { width: 150px; height: 150px; top: 20%; right: -30px; animation-delay: 4s; }
+    @keyframes floatShape { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .hero-icon { margin-bottom: 16px; }
+    .hero h1 { font-size: 2rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px; }
+    .hero-subtitle { font-size: 0.95rem; color: var(--text-secondary); margin-top: 10px; line-height: 1.7; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+    /* ===================== 主题 Banner（毛玻璃卡片） ===================== */
+    .banner-wrap { max-width: 1040px; margin: -24px auto 0; padding: 0 20px; position: relative; z-index: 10; }
+    .banner {
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.6); border-radius: var(--radius-xl);
+      padding: 24px 28px; box-shadow: var(--shadow-lg);
+      display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;
+    }
+    .banner-item { flex: 1; min-width: 260px; }
+    .banner-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .banner-value { font-size: 1.05rem; font-weight: 700; }
+    .banner-value.theme { color: var(--primary-darker); }
+    .banner-value.module { color: var(--purple); }
+    .banner-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ===================== 内容区域 ===================== */
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 40px; }
+
+    /* 章节标题 */
+    .section-title {
+      display: flex; align-items: center; gap: 12px; margin: 40px 0 8px;
+      font-size: 1.3rem; font-weight: 700; color: var(--text-primary);
+    }
+    .section-title .num {
+      width: 36px; height: 36px; border-radius: var(--radius-md);
+      background: var(--primary-darker); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 700; flex-shrink: 0;
+    }
+    .section-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px; padding-left: 48px; }
+
+    /* 提示条 */
+    .hint {
+      background: var(--warning-light); border: 1px solid rgba(232,168,56,0.2);
+      color: #7a5b00; padding: 10px 16px; border-radius: var(--radius-md);
+      font-size: 0.82rem; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 8px;
+    }
+    .hint svg { flex-shrink: 0; margin-top: 2px; color: var(--warning); }
+
+    /* ===================== 数据表格 ===================== */
+    .table-wrap {
+      background: var(--bg-card); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+      overflow: hidden; overflow-x: auto;
+    }
+    .data-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+    .data-table th {
+      padding: 14px 16px; text-align: left; font-size: 0.78rem; font-weight: 600;
+      color: var(--text-muted); background: var(--primary-lighter);
+      border-bottom: 1px solid var(--border); white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px; font-size: 0.85rem; border-bottom: 1px solid var(--border-light);
+    }
+    .data-table tbody tr { transition: var(--transition); }
+    .data-table tbody tr:hover { background: var(--bg-hover); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .cell-role { font-weight: 600; color: var(--primary-darker); }
+    .cell-name { font-weight: 500; }
+    .cell-module { font-size: 0.8rem; }
+    .cell-module .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; margin: 1px; }
+
+    /* ===================== 卡片网格 ===================== */
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px; margin-bottom: 8px;
+    }
+
+    /* 功能模块卡片 */
+    .module-card {
+      background: var(--bg-card); border-radius: var(--radius-xl); padding: 28px 24px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+      transition: var(--transition); display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .module-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--primary);
+    }
+    .module-card:hover {
+      box-shadow: var(--shadow-lg); transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+    .module-card-icon {
+      width: 52px; height: 52px; border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 1.3rem;
+    }
+    .module-card .tag {
+      display: inline-block; background: var(--primary-lighter);
+      color: var(--primary-darker); font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; width: fit-content;
+    }
+    .module-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .module-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; line-height: 1.6; }
+    .module-card .btn { margin-top: 16px; }
+
+    /* Skills 卡片（紫色系） */
+    .skill-card {
+      background: var(--bg-card); border-radius: var(--radius-xl); padding: 28px 24px;
+      box-shadow: var(--shadow-sm); border: 1px solid #E8E3F5;
+      transition: var(--transition); display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .skill-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--purple);
+    }
+    .skill-card:hover {
+      box-shadow: var(--shadow-lg); transform: translateY(-4px);
+      border-color: var(--purple);
+    }
+    .skill-card .tag {
+      display: inline-block; background: var(--purple-light);
+      color: var(--purple); font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; width: fit-content;
+    }
+    .skill-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+    .skill-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; line-height: 1.6; }
+    .skill-card .skill-meta {
+      margin-top: 10px; font-size: 0.78rem; color: var(--purple);
+      background: var(--purple-light); padding: 8px 12px; border-radius: var(--radius-sm);
+    }
+    .skill-card .btn { margin-top: 14px; }
+
+    /* ===================== 按钮 ===================== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 20px; border: none; border-radius: var(--radius-md);
+      font-size: 0.85rem; font-weight: 500; font-family: inherit; cursor: pointer;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--primary-darker); color: #fff;
+      box-shadow: 0 2px 8px rgba(91,143,168,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark); transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(91,143,168,0.35);
+    }
+    .btn-purple {
+      background: var(--purple); color: #fff;
+      box-shadow: 0 2px 8px rgba(155,143,212,0.25);
+    }
+    .btn-purple:hover {
+      background: #8577c4; transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(155,143,212,0.35);
+    }
+    .btn-block { width: 100%; padding: 12px; font-size: 0.88rem; }
+
+    /* ===================== 统计栏 ===================== */
+    .stat-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--bg-card); border-radius: var(--radius-lg); padding: 20px 24px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+      transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--card-accent, var(--primary));
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .stat-card-label { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px; }
+    .stat-card-value { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+
+    /* ===================== Footer ===================== */
+    .site-footer {
+      text-align: center; padding: 40px 20px;
+      color: var(--text-muted); font-size: 0.82rem;
+      border-top: 1px solid var(--border-light);
+      background: var(--bg-card); margin-top: 40px;
+    }
+    .site-footer strong { color: var(--primary-darker); }
+
+    /* ===================== Skill 详情弹窗（全宽大弹窗，参照 skills-showcase） ===================== */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(26,43,60,0.5); backdrop-filter: blur(6px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease; overflow-y: auto;
+    }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: #fff; border-radius: var(--radius-lg); width: 960px; max-width: 100%;
+      box-shadow: 0 20px 60px rgba(26,43,60,0.25); overflow: hidden;
+      transform: scale(0.96) translateY(20px); margin: 20px 0;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-overlay.show .modal { transform: scale(1) translateY(0); }
+
+    /* 弹窗内 Hero */
+    .modal-hero {
+      background: linear-gradient(135deg, #A8C4D4 0%, #7FA8BE 40%, #5B8A9E 100%);
+      padding: 48px 36px 40px; text-align: center; color: #fff; position: relative; overflow: hidden;
+    }
+    .modal-hero::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px; background: rgba(255,255,255,0.06); border-radius: 50%;
+    }
+    .modal-hero::after {
+      content: ''; position: absolute; bottom: -30px; left: -30px;
+      width: 140px; height: 140px; background: rgba(255,255,255,0.04); border-radius: 50%;
+    }
+    .modal-hero-content { position: relative; z-index: 1; }
+    .modal-hero-tag {
+      display: inline-block; padding: 4px 14px; background: rgba(255,255,255,0.2);
+      border-radius: 100px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .modal-hero h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
+    .modal-hero .modal-hero-sub { font-size: 0.88rem; opacity: 0.85; }
+    .modal-hero-stats {
+      display: flex; justify-content: center; gap: 36px; margin-top: 20px;
+    }
+    .modal-hero-stat { text-align: center; }
+    .modal-hero-stat .num { font-size: 1.6rem; font-weight: 800; display: block; }
+    .modal-hero-stat .label { font-size: 0.72rem; opacity: 0.75; }
+
+    .modal-close-btn {
+      position: absolute; top: 16px; right: 16px; z-index: 10;
+      width: 36px; height: 36px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.2); color: #fff; font-size: 1.3rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; line-height: 1;
+    }
+    .modal-close-btn:hover { background: rgba(255,255,255,0.35); }
+
+    /* 弹窗内 Section */
+    .modal-section { padding: 36px; }
+    .modal-section + .modal-section { border-top: 1px solid var(--border-light); padding-top: 32px; }
+    .modal-section-header {
+      text-align: center; margin-bottom: 24px;
+    }
+    .modal-section-label {
+      font-size: 0.7rem; font-weight: 700; color: var(--primary-darker);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;
+    }
+    .modal-section-header h3 { font-size: 1.2rem; font-weight: 700; }
+    .modal-section-header .desc { font-size: 0.84rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* 弹窗内 Skill 卡片 */
+    .modal-skill-card {
+      background: #fff; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+    .modal-skill-card-header {
+      padding: 24px 28px 16px; position: relative;
+    }
+    .modal-skill-card-header::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--primary);
+    }
+    .modal-skill-card-header .num-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: var(--primary-lighter);
+      border-radius: 50%; font-weight: 800; color: var(--primary-darker);
+      font-size: 0.82rem; margin-bottom: 10px;
+    }
+    .modal-skill-card-header h4 { font-size: 1.1rem; font-weight: 700; }
+    .modal-skill-card-header .en { font-size: 0.75rem; color: var(--text-muted); }
+    .modal-skill-card-body { padding: 0 28px 20px; }
+    .modal-skill-card-body .sk-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-bottom: 14px; }
+    .modal-skill-card-body .sk-features { list-style: none; }
+    .modal-skill-card-body .sk-features li {
+      font-size: 0.82rem; color: var(--text); padding: 5px 0; padding-left: 20px;
+      position: relative; border-bottom: 1px solid var(--border-light);
+    }
+    .modal-skill-card-body .sk-features li:last-child { border-bottom: none; }
+    .modal-skill-card-body .sk-features li::before { content: '\25B8'; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
+    .modal-skill-card-body .sk-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .modal-skill-card-body .sk-tags .stag {
+      font-size: 0.7rem; padding: 3px 10px; background: var(--primary-lighter);
+      color: var(--primary-darker); border-radius: 100px; font-weight: 500;
+    }
+    .modal-skill-card-footer {
+      padding: 14px 28px; background: var(--primary-lighter);
+      font-size: 0.76rem; color: var(--text-light);
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* 弹窗内 Demo */
+    .modal-demo-wrap {
+      background: #fff; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); overflow: hidden;
+    }
+    .modal-demo-tabs {
+      display: flex; background: var(--primary-lighter); border-bottom: 1px solid var(--border-light); overflow-x: auto;
+    }
+    .modal-demo-tab {
+      padding: 12px 22px; border: none; background: none; cursor: pointer;
+      font-size: 0.84rem; font-weight: 500; color: var(--text-secondary);
+      white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.2s; font-family: inherit;
+    }
+    .modal-demo-tab.active { color: var(--primary-darker); font-weight: 700; border-bottom-color: var(--primary-darker); background: #fff; }
+    .modal-demo-tab:hover:not(.active) { color: var(--text-primary); }
+    .modal-demo-content { display: none; padding: 28px; }
+    .modal-demo-content.active { display: block; }
+    .modal-demo-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .modal-demo-side h5 { font-size: 0.78rem; font-weight: 600; color: var(--primary-darker); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .modal-demo-input-box {
+      background: #F0F4F6; border-radius: var(--radius-sm); padding: 16px;
+      font-size: 0.8rem; color: var(--text-primary); line-height: 1.65;
+      font-family: "SF Mono", Consolas, monospace; max-height: 220px; overflow: auto; border: 1px solid var(--border);
+    }
+    .modal-demo-output-box {
+      background: var(--primary-lighter); border-radius: var(--radius-sm);
+      padding: 16px; font-size: 0.8rem; color: var(--text-primary);
+      line-height: 1.6; max-height: 320px; overflow: auto; border: 1px solid var(--border); display: none;
+    }
+    .modal-demo-output-box.show { display: block; }
+    .modal-demo-output-box table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+    .modal-demo-output-box th, .modal-demo-output-box td { border: 1px solid var(--border); padding: 5px 8px; text-align: left; }
+    .modal-demo-output-box th { background: var(--primary-light); font-weight: 600; }
+    .modal-demo-run-btn {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--primary-darker); color: #fff; border: none;
+      padding: 7px 18px; border-radius: 6px; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; margin: 10px 0; transition: all 0.2s; font-family: inherit;
+    }
+    .modal-demo-run-btn:hover { background: var(--primary-dark); }
+    .modal-demo-placeholder {
+      text-align: center; padding: 40px 16px; color: var(--text-muted);
+      font-size: 0.82rem; background: #F0F4F6; border-radius: var(--radius-sm); border: 1px dashed var(--border);
+    }
+
+    /* 弹窗内下载区 */
+    .modal-download {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      background: #fff; border-radius: var(--radius-md);
+      padding: 28px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+    }
+    .modal-download-icon {
+      width: 64px; height: 64px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(127,168,190,0.4);
+    }
+    .modal-download-info { flex: 1; min-width: 180px; }
+    .modal-download-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+    .modal-download-info p { font-size: 0.82rem; color: var(--text-muted); }
+    .modal-download-info .meta { font-size: 0.74rem; color: var(--text-muted); margin-top: 4px; }
+    .modal-download-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary-darker); color: #fff; padding: 12px 28px;
+      border-radius: 10px; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .modal-download-btn:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(91,138,158,0.35); }
+
+    /* 弹窗内安装步骤 */
+    .modal-install-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .modal-install-step {
+      background: var(--primary-lighter); border-radius: var(--radius-sm); padding: 20px; position: relative;
+    }
+    .modal-install-step .step-num {
+      position: absolute; top: -12px; left: 16px; width: 28px; height: 28px;
+      background: var(--primary-darker); color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.8rem;
+    }
+    .modal-install-step h5 { font-size: 0.88rem; font-weight: 700; margin: 6px 0 6px; }
+    .modal-install-step p { font-size: 0.78rem; color: var(--text-light); line-height: 1.5; }
+    .modal-install-step code {
+      display: block; background: #E8EFF3; padding: 6px 10px; border-radius: 4px;
+      font-size: 0.72rem; color: var(--primary-darker); margin-top: 6px;
+      font-family: "SF Mono", Consolas, monospace; word-break: break-all;
+    }
+
+    /* 弹窗内源码区 */
+    .modal-source-tabs {
+      display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 0;
+    }
+    .modal-source-tab {
+      padding: 8px 16px; background: #F0F4F6; border: none; cursor: pointer;
+      font-size: 0.8rem; font-weight: 500; color: var(--text-light);
+      border-radius: 6px 6px 0 0; transition: all 0.2s; font-family: inherit;
+    }
+    .modal-source-tab.active { background: #fff; color: var(--primary-darker); font-weight: 600; }
+    .modal-source-tab:hover:not(.active) { background: var(--primary-light); }
+    .modal-source-panel { display: none; }
+    .modal-source-panel.active { display: block; }
+    .modal-source-panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px; background: var(--primary-lighter);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .modal-source-panel-header .fn {
+      font-size: 0.78rem; color: var(--text-secondary); font-family: monospace;
+    }
+    .modal-source-panel .src-code {
+      max-height: 360px; overflow: auto; padding: 18px 20px;
+      background: #F0F4F6; font-family: "SF Mono", Consolas, monospace;
+      font-size: 0.74rem; line-height: 1.55; color: var(--text-primary);
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .modal-btn-copy {
+      background: var(--primary-darker); color: #fff; border: none;
+      padding: 5px 14px; border-radius: 4px; font-size: 0.72rem;
+      cursor: pointer; transition: background 0.2s; font-family: inherit;
+    }
+    .modal-btn-copy:hover { background: var(--primary-dark); }
+    .modal-btn-copy.copied { background: var(--success); }
+
+    .modal-notice {
+      background: #FEF9E7; border: 1px solid #F4E5A1; border-radius: var(--radius-sm);
+      padding: 14px 18px; margin-top: 16px; display: flex; gap: 10px;
+      font-size: 0.8rem; color: #7D6B00; line-height: 1.5;
+    }
+    .modal-notice strong { color: #5D4E00; }
+
+    /* ===================== 响应式 ===================== */
+    @media (max-width: 768px) {
+      .hero { padding: 40px 16px 36px; }
+      .hero h1 { font-size: 1.5rem; }
+      .banner { flex-direction: column; gap: 14px; padding: 18px 20px; }
+      .section-title { font-size: 1.1rem; }
+      .grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: repeat(2, 1fr); }
+      .modal-demo-layout { grid-template-columns: 1fr; }
+      .modal-install-steps { grid-template-columns: 1fr; }
+      .modal-hero-stats { gap: 20px; flex-wrap: wrap; }
+      .modal-section { padding: 24px 20px; }
+      .modal-hero { padding: 32px 20px 28px; }
+      .modal-hero h2 { font-size: 1.3rem; }
+      .modal-download { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== Hero 区域 ===================== -->
+  <section class="hero">
+    <div class="hero-shapes">
+      <span class="shape shape-1"></span>
+      <span class="shape shape-2"></span>
+      <span class="shape shape-3"></span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-icon">
+        <svg viewBox="0 0 48 48" width="48" height="48" fill="none">
+          <rect x="4" y="4" width="40" height="40" rx="12" fill="#A8C4D4" opacity="0.2"/>
+          <path d="M24 10c-4 0-7 3-7 7v3h-2v16h18V20h-2v-3c0-4-3-7-7-7zm0 3c2.2 0 4 1.8 4 4v3h-8v-3c0-2.2 1.8-4 4-4zm0 13c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" fill="#5B8FA8"/>
+        </svg>
+      </div>
+      <h1>【第X组】人力资源管理数字化设计项目展示</h1>
+      <p class="hero-subtitle">本组围绕自选主题开发五个功能模块（第一部分·开发工具），并选取其中一个模块封装五个细粒度 Skills（第二部分·封装 Skills），可按需调用、彼此支持。</p>
+    </div>
+  </section>
+
+  <!-- ===================== 主题 Banner ===================== -->
+  <div class="banner-wrap">
+    <div class="banner">
+      <div class="banner-item">
+        <div class="banner-label">本组 HR 主题</div>
+        <div class="banner-value theme">【填写：如"校园招聘人岗匹配"】</div>
+        <div class="banner-note">围绕此主题展开五个功能模块设计</div>
+      </div>
+      <div class="banner-item">
+        <div class="banner-label">第二部分所选模块</div>
+        <div class="banner-value module">模块五 · 内部活水平台</div>
+        <div class="banner-note">从该模块封装五个细粒度 Skills</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 内容主体 ===================== -->
+  <div class="wrap">
+
+    <!-- 概览统计 -->
+    <div class="stat-row">
+      <div class="stat-card" style="--card-accent:var(--primary-darker);">
+        <div class="stat-card-label">团队成员</div>
+        <div class="stat-card-value" style="color:var(--primary-darker);">7 人</div>
+      </div>
+      <div class="stat-card" style="--card-accent:var(--info);">
+        <div class="stat-card-label">功能模块</div>
+        <div class="stat-card-value" style="color:var(--info);">5 个</div>
+      </div>
+      <div class="stat-card" style="--card-accent:var(--purple);">
+        <div class="stat-card-label">Skills 封装</div>
+        <div class="stat-card-value" style="color:var(--purple);">5 个</div>
+      </div>
+      <div class="stat-card" style="--card-accent:var(--success);">
+        <div class="stat-card-label">项目状态</div>
+        <div class="stat-card-value" style="color:var(--success);">进行中</div>
+      </div>
+    </div>
+
+    <!-- ===== 一、团队信息 ===== -->
+    <div class="section-title">
+      <span class="num">一</span> 项目团队信息
+    </div>
+    <p class="section-desc">分工与贡献须写清"谁、负责什么、具体做了什么"。</p>
+    <div class="hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      将下方内容替换为本组真实信息。
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>角色</th><th>姓名</th><th>学号</th><th>负责模块 / Skills</th><th>分工与贡献说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="cell-role">组长</td><td class="cell-name">杨梦含</td><td>13718760644</td><td class="cell-module"><span class="tag" style="background:var(--primary-lighter);color:var(--primary-darker);">统筹</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">模块五</span></td><td>主题确定、任务分解、进度协调、页面整合、最终汇总。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">方云梦</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--info-light);color:var(--info);">模块一</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill①</span></td><td>模块一设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">朴志恩</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--success-light);color:var(--success);">模块二</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill②</span></td><td>模块二设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">赵雨榕</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--warning-light);color:var(--warning);">模块三</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill③</span></td><td>模块三设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">姚婧媛</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--danger-light);color:var(--danger);">模块四</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill④</span></td><td>模块四设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">赵雨轩</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--primary-lighter);color:var(--primary-darker);">模块五</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill⑤</span></td><td>模块五设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">苗雨晴</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--info-light);color:var(--info);">模块二</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill②</span></td><td>模块二辅助设计与对应细粒度 Skills 优化。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== 二、五个功能模块 ===== -->
+    <div class="section-title">
+      <span class="num">二</span> 五个功能模块（第一部分·开发工具）
+    </div>
+    <p class="section-desc">五个模块围绕本组主题自选。每张卡片"点此体验"链接替换为本组实际成果地址。</p>
+    <div class="hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      替换卡片中的模块名、概要说明和体验链接。
+    </div>
+    <div class="grid">
+      <div class="module-card">
+        <div class="module-card-icon" style="background:#EDF4F8;color:#5B8FA8;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+        </div>
+        <span class="tag">模块一</span>
+        <h3>岗位匹配度测评</h3>
+        <p>概要：该 Skill 解决的是"招聘评估主观且不可复用"的问题——把"感觉这个人合不合适"变成可量化、可复现、去偏见的四维度匹配评分。</p>
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" onclick="openSkill('recruitment-expert')">点此体验 →</a>
+      </div>
+      <div class="module-card">
+        <div class="module-card-icon" style="background:#E8F6EE;color:#4CAF7C;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <span class="tag">模块二</span>
+        <h3>HR智能咨询台</h3>
+        <p>概要：【一句话说明】。</p>
+        <a href="#" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+      </div>
+      <div class="module-card">
+        <div class="module-card-icon" style="background:#FDF3E2;color:#E8A838;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <span class="tag">模块三</span>
+        <h3>劳动合同签订助手</h3>
+        <p>概要：【一句话说明】。</p>
+        <a href="https://www.htmlcode.fun/s/hr-contract-system" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+      </div>
+      <div class="module-card">
+        <div class="module-card-icon" style="background:#FCEAE9;color:#E5655E;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span class="tag">模块四</span>
+        <h3>劳动纠纷风险诊断</h3>
+        <p>概要：【一句话说明】。</p>
+        <a href="https://www.htmlcode.fun/s/labor-risk-agent" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+      </div>
+      <div class="module-card">
+        <div class="module-card-icon" style="background:#EFEDF8;color:#9B8FD4;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        </div>
+        <span class="tag">模块五</span>
+        <h3>内部活水平台</h3>
+        <p>概要：解决企业内部"人才想动找不到机会、岗位缺人找不到人"的信息错配问题，用三维匹配算法让内部流转从"靠关系打听"变成"靠数据精准推荐"。</p>
+        <a href="talent-mobility-admin/index.html" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+      </div>
+    </div>
+
+    <!-- ===== 三、五个 Skills ===== -->
+    <div class="section-title">
+      <span class="num">三</span> 五个 Skills（第二部分·封装 Skills，指向所选模块）
+    </div>
+    <p class="section-desc">五个 Skills 均指向上方"所选模块"，颗粒度更细、各自独立。建议每个 Skill 命名为"如何基于某方法做某件事"。</p>
+    <div class="hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      流程：先用 WorkBuddy 设计初版，再用达尔文 / 盘古技能打磨优化、提升得分。
+    </div>
+    <div class="grid">
+      <div class="skill-card">
+        <span class="tag">Skill ①</span>
+        <h3>智能招聘大师</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+      <div class="skill-card">
+        <span class="tag">Skill ②</span>
+        <h3>内部活水三维匹配引擎</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+      <div class="skill-card">
+        <span class="tag">Skill ③</span>
+        <h3>外部人才市场数据参考</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+      <div class="skill-card">
+        <span class="tag">Skill ④</span>
+        <h3>HR人力资源管理</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+      <div class="skill-card">
+        <span class="tag">Skill ⑤</span>
+        <h3>活水竞争力排行榜</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    本页面为作业展示入口模板，由 <strong>【第X组】</strong> 制作并提交。教师评审请点击各模块与 Skills"点此体验"链接查看成果。
+  </footer>
+
+  <!-- ===================== Skill 详情弹窗（全宽大弹窗，参照 skills-showcase） ===================== -->
+  <div class="modal-overlay" id="skillModalOverlay">
+    <div class="modal" id="skillModal">
+      <button class="modal-close-btn" id="skillModalClose">&times;</button>
+
+      <!-- Hero -->
+      <div class="modal-hero">
+        <div class="modal-hero-content">
+          <div class="modal-hero-tag" id="smHeroTag">AI SKILL</div>
+          <h2 id="smHeroTitle">资深招聘专家</h2>
+          <div class="modal-hero-sub" id="smHeroSub">recruitment-expert</div>
+          <div class="modal-hero-stats">
+            <div class="modal-hero-stat"><span class="num">3</span><span class="label">核心能力</span></div>
+            <div class="modal-hero-stat"><span class="num">4</span><span class="label">功能特性</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一、在线效果展示 -->
+      <div class="modal-section">
+        <div class="modal-section-header">
+          <div class="modal-section-label">DEMO</div>
+          <h3>在线效果展示</h3>
+          <p class="desc">以下为 recruitment-expert 的核心功能演示，展示 JD 生成与简历筛选的真实输出效果</p>
+        </div>
+
+        <!-- Skill 信息卡片 -->
+        <div class="modal-skill-card" style="margin-bottom:20px;">
+          <div class="modal-skill-card-header">
+            <div class="num-badge">01</div>
+            <h4 id="smCardTitle">资深招聘专家</h4>
+            <div class="en" id="smCardEn">recruitment-expert</div>
+          </div>
+          <div class="modal-skill-card-body">
+            <p class="sk-desc" id="smCardDesc"></p>
+            <ul class="sk-features" id="smCardFeatures"></ul>
+            <div class="sk-tags" id="smCardTags"></div>
+          </div>
+          <div class="modal-skill-card-footer">
+            ⚡ 触发词：<span id="smCardTrigger" style="font-weight:600;color:var(--primary-darker);"></span>
+          </div>
+        </div>
+
+        <!-- Demo 交互 -->
+        <div class="modal-demo-wrap">
+          <div class="modal-demo-tabs" id="smDemoTabs"></div>
+          <div id="smDemoContents"></div>
+        </div>
+
+        <div class="modal-notice">
+          <span style="font-size:1.2rem;">ℹ️</span>
+          <span><strong>说明：</strong>以上演示为预置的真实输出示例。实际使用时，Skill 会根据你的具体输入动态生成结果。</span>
+        </div>
+      </div>
+
+      <!-- 二、下载与安装 -->
+      <div class="modal-section">
+        <div class="modal-section-header">
+          <div class="modal-section-label">GET STARTED</div>
+          <h3>下载与安装</h3>
+          <p class="desc">3 步即可在 WorkBuddy 中使用此 Skill</p>
+        </div>
+
+        <div class="modal-download">
+          <div class="modal-download-icon">📦</div>
+          <div class="modal-download-info">
+            <h4 id="smDlTitle">Skill 技能包</h4>
+            <p id="smDlDesc">包含完整源码（SKILL.md + references + assets）</p>
+            <div class="meta">📁 <span id="smDlName">recruitment-expert</span> · 💾 ~8 KB · 📂 1 个 Skill 目录</div>
+          </div>
+          <a href="recruitment-expert.zip" download class="modal-download-btn" id="smDlBtn">
+            下载技能包 <span style="font-size:1.1rem;">↓</span>
+          </a>
+        </div>
+
+        <div class="modal-install-steps">
+          <div class="modal-install-step">
+            <div class="step-num">1</div>
+            <h5>下载并解压</h5>
+            <p>下载 zip 后解压得到 Skill 文件夹</p>
+            <code id="smInstallDir1">recruitment-expert/</code>
+          </div>
+          <div class="modal-install-step">
+            <div class="step-num">2</div>
+            <h5>复制到 Skills 目录</h5>
+            <p>将文件夹复制到 WorkBuddy 用户级 Skills 目录</p>
+            <code>~/.workbuddy/skills/</code>
+          </div>
+          <div class="modal-install-step">
+            <div class="step-num">3</div>
+            <h5>重启即可使用</h5>
+            <p>重启后，输入触发词即可自动激活</p>
+            <code id="smInstallTrigger">示例："帮我生成前端工程师JD"</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- 三、源码查看 -->
+      <div class="modal-section">
+        <div class="modal-section-header">
+          <div class="modal-section-label">SOURCE CODE</div>
+          <h3>源码查看</h3>
+          <p class="desc">完整 SKILL.md 源码，可直接复制使用</p>
+        </div>
+
+        <div class="modal-source-tabs" id="smSourceTabs">
+          <button class="modal-source-tab active" onclick="switchSmSource(0)">📋 recruitment-expert</button>
+        </div>
+        <div class="modal-source-panel active" id="smSourcePanel0">
+          <div class="modal-source-panel-header">
+            <span class="fn">📋 recruitment-expert/SKILL.md</span>
+            <button class="modal-btn-copy" onclick="copySmSource(0)">📋 复制源码</button>
+          </div>
+          <div class="src-code" id="smSourceCode0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===================== Skill 数据 =====================
+    var skillData = {
+      "recruitment-expert": {
+        tag: "AI SKILL",
+        heroTitle: "资深招聘专家",
+        heroSub: "recruitment-expert",
+        heroStats: { capabilities: "3", features: "4", original: "100%" },
+        cardTitle: "资深招聘专家",
+        cardEn: "recruitment-expert",
+        cardDesc: "模拟 10 年互联网招聘经验的资深专家，精准解读岗位需求、深度解析简历、客观评估人岗匹配度，全程执行反偏见招聘原则。",
+        cardFeatures: [
+          "<strong>JD 生成</strong>：输入岗位名 → 输出结构化 JD（职责/要求/加分项/关键词标签）",
+          "<strong>简历解析</strong>：信息脱敏 → 四维度匹配分析 → 量化评分（100分制）",
+          "<strong>推荐排序</strong>：多候选人按得分排序，输出推荐报告与录用建议",
+          "<strong>反偏见引擎</strong>：自动屏蔽姓名/性别/年龄等，语言中立，多元包容"
+        ],
+        cardTags: ["JD生成", "简历筛选", "匹配度评分", "反偏见"],
+        cardTrigger: "生成JD / 筛选简历 / 候选人推荐",
+        dlTitle: "Recruitment Expert · 技能包",
+        dlDesc: "包含完整源码（SKILL.md + references）",
+        dlName: "recruitment-expert",
+        installDir: "recruitment-expert/",
+        installTrigger: '示例："帮我生成一个前端工程师的JD"',
+        demos: [
+          {
+            label: "📋 JD 生成",
+            input: '帮我生成一个「高级前端工程师」的职位描述（JD）',
+            output: '<h3 style="color:var(--primary-darker);margin-bottom:8px;">高级前端工程师 · 职位描述</h3><hr style="margin:8px 0;border:none;border-top:1px solid var(--border);"><p><strong>岗位职责：</strong></p><ol style="padding-left:18px;margin:4px 0 10px;"><li>负责公司核心 Web 产品的前端架构设计与开发</li><li>主导前端技术选型与规范制定，建立组件库与工程化体系</li><li>与产品、设计、后端紧密协作，推动需求落地与体验优化</li><li>优化页面性能，包括首屏加载、运行时性能与 SEO</li><li>参与 Code Review，指导初中级工程师</li><li>探索前端新技术（WebAssembly、微前端等），评估落地可行性</li></ol><p><strong>任职要求：</strong></p><ol style="padding-left:18px;margin:4px 0 10px;"><li>本科及以上学历，5 年以上前端开发经验</li><li>精通 JavaScript / TypeScript，深入理解 ES6+</li><li>熟练掌握 React 或 Vue 3 全家桶，有大型 SPA 架构经验</li><li>熟悉 Webpack / Vite 构建工具</li><li>掌握 CSS 动画、Flex/Grid 布局，响应式与跨端适配</li><li>具备良好的系统设计能力</li></ol><p><strong>加分项：</strong></p><ul style="padding-left:18px;margin:4px 0 10px;"><li>有微前端 / SSR / ISR 实际落地经验</li><li>熟悉 Node.js，能做 BFF 层开发</li><li>有开源项目贡献或技术博客输出</li></ul><p><strong>关键词：</strong> <span style="font-size:0.78rem;color:var(--primary-darker);">JavaScript | TypeScript | React | Vue3 | Webpack | Vite | 微前端 | 性能优化 | 前端架构</span></p>'
+          },
+          {
+            label: "📄 简历筛选",
+            input: '岗位：高级前端工程师\n\n简历摘要：\n候选人 A — 6年前端经验，精通 React + TypeScript，\n主导过电商平台重构，首屏性能提升 40%。\n有微前端落地经验，GitHub 200+ star。\n\n候选人 B — 4年前端经验，Vue 技术栈为主，\n做过后台管理系统，无大型 C 端项目经验。',
+            output: '<h3 style="color:var(--primary-darker);margin-bottom:8px;">候选人推荐排序报告</h3><table><tr><th>排名</th><th>候选人</th><th>得分</th><th>核心优势</th><th>主要差距</th></tr><tr><td>1</td><td><strong>A</strong></td><td style="color:#c0392b;font-weight:700;">88/100</td><td>React+TS精通，微前端落地，开源贡献</td><td>无 SSR 经验</td></tr><tr><td>2</td><td><strong>B</strong></td><td style="color:#e67e22;font-weight:700;">65/100</td><td>Vue 技术栈完整，BFF 经验</td><td>经验年限不足</td></tr></table><hr style="margin:10px 0;border:none;border-top:1px solid var(--border);"><p><strong>候选人 A · 详细评估：</strong></p><p style="font-size:0.78rem;">✅ 匹配度得分：88/100</p><p style="font-size:0.78rem;margin:4px 0;"><strong>核心匹配点：</strong></p><ul style="padding-left:18px;font-size:0.78rem;"><li>6年经验+React/TS精通 — 直接命中 JD 硬性要求</li><li>电商平台重构+首屏提升40% — 有量化证据</li><li>微前端落地经验 — JD 加分项直接匹配</li></ul><p style="font-size:0.78rem;margin:4px 0;"><strong>潜在差距：</strong></p><ul style="padding-left:18px;font-size:0.78rem;"><li>无 SSR/ISR 经验 — 非致命</li></ul><p style="font-size:0.78rem;margin:4px 0;"><strong>面试追问：</strong></p><p style="font-size:0.78rem;">微前端方案选型时，如何处理子应用间的样式隔离与状态共享？</p>'
+          }
+        ],
+        sources: [{
+          name: "📋 recruitment-expert/SKILL.md",
+          code: '---\nname: recruitment-expert\ndescription: "资深互联网行业招聘专家技能。当用户需要生成或优化职位描述（JD）、解析简历、评估人岗匹配度、筛选候选人、生成招聘推荐报告时触发此技能。适用场景包括：输入岗位名称生成结构化JD、批量简历筛选与评分、候选人排序推荐、面试追问建议生成。"\n---\n\n# Recruitment Expert — 资深招聘专家\n\n## Overview\n\n本技能模拟一名拥有 10 年互联网行业招聘经验的资深招聘专家，具备精准解读岗位需求、深度解析简历、客观评估人岗匹配度的能力。核心工作原则为屏蔽姓名、性别、年龄、照片等个人信息，仅关注技能、经验与潜力，积极践行多元化招聘。\n\n## Core Capabilities\n\n### 1. JD 优化与生成\n\n当用户输入一个岗位名称（如"高级前端工程师""产品经理""数据分析师"等）时，生成一份结构完整、关键词精准的职位描述。\n\n**输出结构：**\n- **岗位名称**：标准化职位名称\n- **岗位职责**（5-8 条）：使用动宾结构，每条聚焦一个核心职责\n- **任职要求**（5-8 条）：分为硬性要求与能力要求\n- **加分项**（3-5 条）：区分核心竞争力的延伸能力\n- **关键词标签**：提取 5-10 个招聘平台 SEO 关键词\n\n**JD 生成流程：**\n1. 解析岗位名称，识别职能类别\n2. 参照 references/jd_framework.md 中对应职能的 JD 框架模板\n3. 根据行业默认标准填充岗位职责与任职要求\n4. 补充加分项与关键词标签\n5. 输出完整 JD\n\n### 2. 简历解析与匹配度评分\n\n当用户提供多份简历文本并指定目标岗位时，为每份简历进行深度解析与匹配度评估。\n\n**评估流程：**\n1. **信息脱敏**：屏蔽姓名、性别、年龄等个人信息\n2. **岗位需求拆解**：核心硬技能 / 核心软技能 / 经验要求 / 加分能力\n3. **逐份评估**：按四维度进行匹配分析\n4. **评分计算**：参照 references/scoring_rubric.md\n5. **排序输出**：按得分从高到低排列\n\n### 3. 反偏见执行规范\n\n贯穿所有能力模块，严格执行以下反偏见原则：\n- **信息屏蔽**：自动识别并屏蔽与职业能力无关的个人信息\n- **语言中立**：避免使用性别倾向性词汇\n- **评分客观**：仅基于技能、经验、项目成果\n- **多元包容**：积极识别多元化背景带来的独特价值\n\n## Resources\n\n- references/jd_framework.md — JD 框架模板与关键词库\n- references/scoring_rubric.md — 匹配度评分标准\n- references/anti_bias_guidelines.md — 反偏见执行规范'
+        }]
+      }
+    };
+
+    // ===================== 弹窗逻辑 =====================
+    var overlay = document.getElementById('skillModalOverlay');
+    var modalClose = document.getElementById('skillModalClose');
+    var currentSmSources = [];
+
+    function openSkill(key) {
+      var d = skillData[key];
+      if (!d) return;
+
+      // Hero
+      document.getElementById('smHeroTag').textContent = d.tag;
+      document.getElementById('smHeroTitle').textContent = d.heroTitle;
+      document.getElementById('smHeroSub').textContent = d.heroSub;
+
+      // Skill Card
+      document.getElementById('smCardTitle').textContent = d.cardTitle;
+      document.getElementById('smCardEn').textContent = d.cardEn;
+      document.getElementById('smCardDesc').textContent = d.cardDesc;
+      var fhtml = ''; d.cardFeatures.forEach(function(f){ fhtml += '<li>' + f + '</li>'; });
+      document.getElementById('smCardFeatures').innerHTML = fhtml;
+      var thtml = ''; d.cardTags.forEach(function(t){ thtml += '<span class="stag">' + t + '</span>'; });
+      document.getElementById('smCardTags').innerHTML = thtml;
+      document.getElementById('smCardTrigger').textContent = d.cardTrigger;
+
+      // Demo Tabs + Contents
+      var tabsHtml = '', contentsHtml = '';
+      d.demos.forEach(function(dm, i){
+        tabsHtml += '<button class="modal-demo-tab' + (i===0?' active':'') + '" onclick="switchSmDemo(' + i + ')">' + dm.label + '</button>';
+        contentsHtml += '<div class="modal-demo-content' + (i===0?' active':'') + '" id="smDemo-' + i + '">';
+        contentsHtml += '<div class="modal-demo-layout">';
+        contentsHtml += '<div class="modal-demo-side"><h5>📥 用户输入</h5><div class="modal-demo-input-box">' + escapeHtml(dm.input) + '</div></div>';
+        contentsHtml += '<div class="modal-demo-side"><h5>📤 Skill 输出</h5>';
+        contentsHtml += '<div class="modal-demo-placeholder" id="smDemoPlaceholder-' + i + '">点击下方按钮查看生成结果</div>';
+        contentsHtml += '<button class="modal-demo-run-btn" onclick="runSmDemo(' + i + ')">▶ 模拟运行</button>';
+        contentsHtml += '<div class="modal-demo-output-box" id="smDemoOutput-' + i + '">' + dm.output + '</div>';
+        contentsHtml += '</div></div></div>';
+      });
+      document.getElementById('smDemoTabs').innerHTML = tabsHtml;
+      document.getElementById('smDemoContents').innerHTML = contentsHtml;
+
+      // Download
+      document.getElementById('smDlTitle').textContent = d.dlTitle;
+      document.getElementById('smDlDesc').textContent = d.dlDesc;
+      document.getElementById('smDlName').textContent = d.dlName;
+      document.getElementById('smInstallDir1').textContent = d.installDir;
+      document.getElementById('smInstallTrigger').textContent = d.installTrigger;
+
+      // Source Tabs + Panels
+      currentSmSources = d.sources;
+      var srcTabsHtml = '', srcPanelsHtml = '';
+      d.sources.forEach(function(src, i){
+        srcTabsHtml += '<button class="modal-source-tab' + (i===0?' active':'') + '" onclick="switchSmSource(' + i + ')">📋 ' + d.dlName + '</button>';
+        srcPanelsHtml += '<div class="modal-source-panel' + (i===0?' active':'') + '" id="smSourcePanel' + i + '">';
+        srcPanelsHtml += '<div class="modal-source-panel-header"><span class="fn">' + src.name + '</span><button class="modal-btn-copy" onclick="copySmSource(' + i + ')">📋 复制源码</button></div>';
+        srcPanelsHtml += '<div class="src-code" id="smSourceCode' + i + '">' + escapeHtml(src.code) + '</div>';
+        srcPanelsHtml += '</div>';
+      });
+      document.getElementById('smSourceTabs').innerHTML = srcTabsHtml;
+      // Replace existing source panels
+      var existingPanels = document.querySelectorAll('.modal-source-panel');
+      existingPanels.forEach(function(p){ p.remove(); });
+      var srcTabs = document.getElementById('smSourceTabs');
+      srcTabs.insertAdjacentHTML('afterend', srcPanelsHtml);
+
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSkillModal() {
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function switchSmDemo(idx) {
+      var tabs = document.querySelectorAll('#smDemoTabs .modal-demo-tab');
+      var contents = document.querySelectorAll('#smDemoContents .modal-demo-content');
+      tabs.forEach(function(t, i){ t.classList.toggle('active', i === idx); });
+      contents.forEach(function(c, i){ c.classList.toggle('active', i === idx); });
+    }
+
+    function runSmDemo(idx) {
+      var placeholder = document.getElementById('smDemoPlaceholder-' + idx);
+      var output = document.getElementById('smDemoOutput-' + idx);
+      var btn = document.querySelectorAll('#smDemoContents .modal-demo-run-btn')[idx];
+      if (placeholder) placeholder.style.display = 'none';
+      if (output) output.classList.add('show');
+      if (btn) btn.textContent = '▶ 重新运行';
+    }
+
+    function switchSmSource(idx) {
+      var tabs = document.querySelectorAll('#smSourceTabs .modal-source-tab');
+      var panels = document.querySelectorAll('.modal-source-panel');
+      tabs.forEach(function(t, i){ t.classList.toggle('active', i === idx); });
+      panels.forEach(function(p, i){ p.classList.toggle('active', i === idx); });
+    }
+
+    function copySmSource(idx) {
+      var text = currentSmSources[idx].code;
+      navigator.clipboard.writeText(text).then(function(){
+        var btns = document.querySelectorAll('.modal-source-panel .modal-btn-copy');
+        if (btns[idx]) { btns[idx].textContent = '✓ 已复制'; btns[idx].classList.add('copied');
+          setTimeout(function(){ btns[idx].textContent = '📋 复制源码'; btns[idx].classList.remove('copied'); }, 2000); }
+      }).catch(function(){
+        var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+
+    modalClose.addEventListener('click', closeSkillModal);
+    overlay.addEventListener('click', function(e){
+      if (e.target === overlay) closeSkillModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && overlay.classList.contains('show')) closeSkillModal();
+    });
+  </script>
+
+</body>
+</html>
