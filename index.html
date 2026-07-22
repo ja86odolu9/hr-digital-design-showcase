@@ -189,6 +189,7 @@
       box-shadow: var(--shadow-sm); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer; overflow: hidden; display: flex; flex-direction: column;
       animation: skFadeIn 0.5s ease both;
+      opacity: 0; transform: translateY(24px);
     }
     .skill-card:nth-child(1) { animation-delay: 0.1s; }
     .skill-card:nth-child(2) { animation-delay: 0.2s; }
@@ -1174,6 +1175,20 @@
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape' && overlay.classList.contains('show')) closeSkillModal();
     });
+  </script>
+
+  <!-- Skills 卡片滚动渐入 + 点击高亮 -->
+  <script>
+    (function(){
+      var o=new IntersectionObserver(function(e){e.forEach(function(e){e.isIntersecting&&(e.target.style.opacity='1',e.target.style.transform='translateY(0)')})},{threshold:.1});
+      document.querySelectorAll('.skill-card').forEach(function(c){o.observe(c)});
+      document.querySelectorAll('.skill-card').forEach(function(card){
+        card.addEventListener('click',function(){
+          document.querySelectorAll('.skill-card').forEach(function(c){c.style.borderColor='var(--sk-border-light)';c.style.boxShadow='var(--sk-shadow-sm)'});
+          this.style.borderColor='var(--sk-accent,#A8C4D4)';this.style.boxShadow='var(--sk-shadow-xl)'
+        })
+      })
+    })();
   </script>
 
 </body>
