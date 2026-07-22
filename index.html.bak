@@ -134,8 +134,8 @@
     .data-table tbody tr { transition: var(--transition); }
     .data-table tbody tr:hover { background: var(--bg-hover); }
     .data-table tbody tr:last-child td { border-bottom: none; }
-    .cell-role { font-weight: 600; color: var(--primary-darker); white-space: nowrap; min-width: 48px; }
-    .cell-name { font-weight: 500; white-space: nowrap; min-width: 72px; }
+    .cell-role { font-weight: 600; color: var(--primary-darker); }
+    .cell-name { font-weight: 500; }
     .cell-module { font-size: 0.8rem; }
     .cell-module .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; margin: 1px; }
 
@@ -174,75 +174,33 @@
     .module-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; line-height: 1.6; }
     .module-card .btn { margin-top: 16px; }
 
-    /* ===================== Skills 展示区（新版） ===================== */
-    .skills-showcase { max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; }
-    .skills-tier { margin-bottom: 48px; }
-    .tier-label { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-left: 4px; }
-    .tier-label-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .tier-label-text { font-size: 0.92rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.5px; flex-shrink: 0; }
-    .tier-label-line { flex: 1; height: 1px; background: #E2E8ED; }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
-    @media (min-width: 1200px) { .skills-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } .skills-grid.cols-2 { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 768px) { .skills-grid { grid-template-columns: 1fr; gap: 16px; } .skills-showcase { padding: 0 16px 48px; } }
+    /* Skills 卡片（紫色系） */
     .skill-card {
-      position: relative; background: #fff; border-radius: 24px; border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-sm); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer; overflow: hidden; display: flex; flex-direction: column;
-      animation: skFadeIn 0.5s ease both;
-      opacity: 0; transform: translateY(24px);
+      background: var(--bg-card); border-radius: var(--radius-xl); padding: 28px 24px;
+      box-shadow: var(--shadow-sm); border: 1px solid #E8E3F5;
+      transition: var(--transition); display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
     }
-    .skill-card:nth-child(1) { animation-delay: 0.1s; }
-    .skill-card:nth-child(2) { animation-delay: 0.2s; }
-    .skill-card:nth-child(3) { animation-delay: 0.3s; }
-    .skill-card:nth-child(4) { animation-delay: 0.4s; }
-    .skill-card:nth-child(5) { animation-delay: 0.5s; }
     .skill-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: var(--sk-accent, #A8C4D4); transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--purple);
     }
-    .skill-card:hover::before { transform: scaleX(1); }
-    .skill-card:hover { box-shadow: 0 16px 48px rgba(91,143,168,0.16); transform: translateY(-8px); border-color: var(--sk-accent, #A8C4D4); }
-    .skill-card-inner { padding: 32px 28px 24px; flex: 1; display: flex; flex-direction: column; }
-    .skill-icon-wrap { position: relative; margin-bottom: 20px; }
-    .skill-icon-glow { position: absolute; inset: -12px; border-radius: 50%; background: var(--sk-accent, #A8C4D4); opacity: 0; filter: blur(24px); transition: opacity 0.4s ease; }
-    .skill-card:hover .skill-icon-glow { opacity: 0.15; }
-    .skill-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; position: relative; z-index: 1; transition: transform 0.3s ease; }
-    .skill-card:hover .skill-icon { transform: scale(1.08); }
-    .skill-name { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-    .skill-en-name { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 0.5px; font-weight: 400; }
-    .skill-value { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px; flex: 1; }
-    .skill-value strong { color: var(--text-primary); }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-    .skill-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.73rem; font-weight: 500; background: var(--sk-tag-bg, #EDF4F8); color: var(--sk-accent, #5B8FA8); transition: all 0.25s ease; }
-    .skill-card:hover .skill-tag { transform: translateY(-1px); }
-    .skill-trigger { padding-top: 14px; border-top: 1px solid var(--border-light); display: flex; align-items: flex-start; gap: 8px; font-size: 0.76rem; color: var(--text-muted); }
-    .skill-trigger-icon { flex-shrink: 0; margin-top: 1px; }
-    .skill-trigger-text { line-height: 1.5; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; transition: all 0.3s ease; }
-    .skill-card:hover .skill-trigger-text { -webkit-line-clamp: unset; color: var(--text-secondary); }
-    .skill-detail-panel { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease; padding: 0 28px; background: var(--primary-lighter); border-top: 0 solid #D4E5EE; opacity: 0; }
-    .skill-card:hover .skill-detail-panel { max-height: 280px; padding: 20px 28px; border-top-width: 1px; opacity: 1; }
-    .skill-detail-row { display: flex; gap: 16px; flex-wrap: wrap; }
-    .skill-detail-col { flex: 1; min-width: 120px; }
-    .skill-detail-label { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .skill-detail-value { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
-    .skill-download { margin-top: 14px; padding-top: 12px; border-top: 1px dashed #D4E5EE; display: flex; align-items: center; gap: 8px; }
-    .skill-download-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; text-decoration: none; color: #fff; background: var(--sk-accent, #5B8FA8); transition: all 0.25s ease; }
-    .skill-download-btn:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(91,143,168,0.25); }
-    .skill-download-btn svg { width: 14px; height: 14px; }
-    .skill-card.card-matching { --sk-accent: #5B8FA8; --sk-tag-bg: #EDF4F8; }
-    .skill-card.card-hr { --sk-accent: #4CAF7C; --sk-tag-bg: #E8F6EE; }
-    .skill-card.card-recruit { --sk-accent: #9B8FD4; --sk-tag-bg: #EFEDF8; }
-    .skill-card.card-ranking { --sk-accent: #E8A838; --sk-tag-bg: #FDF3E2; }
-    .skill-card.card-teamops { --sk-accent: #E5655E; --sk-tag-bg: #FCEAE9; }
-    .connection-hint { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 32px 0 40px; color: var(--text-muted); font-size: 0.78rem; }
-    .connection-hint::before, .connection-hint::after { content: ''; width: 60px; height: 1px; background: #E2E8ED; }
-    .connection-dots { display: flex; gap: 6px; }
-    .connection-dots span { width: 6px; height: 6px; border-radius: 50%; background: #A8C4D4; animation: skPulse 1.8s ease-in-out infinite; }
-    .connection-dots span:nth-child(2) { animation-delay: 0.3s; }
-    .connection-dots span:nth-child(3) { animation-delay: 0.6s; }
-    @keyframes skFadeIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes skPulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.6); } }
+    .skill-card:hover {
+      box-shadow: var(--shadow-lg); transform: translateY(-4px);
+      border-color: var(--purple);
+    }
+    .skill-card .tag {
+      display: inline-block; background: var(--purple-light);
+      color: var(--purple); font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; width: fit-content;
+    }
+    .skill-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+    .skill-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; line-height: 1.6; }
+    .skill-card .skill-meta {
+      margin-top: 10px; font-size: 0.78rem; color: var(--purple);
+      background: var(--purple-light); padding: 8px 12px; border-radius: var(--radius-sm);
+    }
+    .skill-card .btn { margin-top: 14px; }
 
     /* ===================== 按钮 ===================== */
     .btn {
@@ -626,13 +584,13 @@
           <tr><th>角色</th><th>姓名</th><th>学号</th><th>负责模块 / Skills</th><th>分工与贡献说明</th></tr>
         </thead>
         <tbody>
-          <tr><td class="cell-role">组长</td><td class="cell-name">杨梦含</td><td>230401928</td><td class="cell-module"><span class="tag" style="background:var(--success-light);color:var(--success);">模块二</span><span class="tag" style="background:var(--primary-lighter);color:var(--primary-darker);">模块五</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skills③</span></td><td>统筹、主题确定、任务分解、项目进度协调，模块二和五设计，Skills③的封装，HTML展示页面制作、纸质报告汇总。</td></tr>
-          <tr><td class="cell-role">成员</td><td class="cell-name">朴志恩</td><td>230401821</td><td class="cell-module"><span class="tag" style="background:var(--info-light);color:var(--info);">模块一</span><span class="tag" style="background:var(--primary-lighter);color:var(--primary-darker);">模块五</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">封装Skills训练</span></td><td>模块一和五设计，负责封装Skills的训练，HTML展示页面制作。</td></tr>
-          <tr><td class="cell-role">成员</td><td class="cell-name">方云梦</td><td>230401129</td><td class="cell-module"><span class="tag" style="background:var(--danger-light);color:var(--danger);">模块四</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skills①</span></td><td>模块四设计，Skills①封装。</td></tr>
-          <tr><td class="cell-role">成员</td><td class="cell-name">赵雨轩</td><td>230401409</td><td class="cell-module"><span class="tag" style="background:var(--warning-light);color:var(--warning);">模块三</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skills②</span></td><td>模块三设计、Skills②封装。</td></tr>
-          <tr><td class="cell-role">成员</td><td class="cell-name">赵雨榕</td><td>230401114</td><td class="cell-module"><span class="tag" style="background:var(--success-light);color:var(--success);">模块二</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skills⑤</span></td><td>模块二设计、Skills⑤封装。</td></tr>
-          <tr><td class="cell-role">成员</td><td class="cell-name">姚婧媛</td><td>230902118</td><td class="cell-module"><span class="tag" style="background:var(--warning-light);color:var(--warning);">模块三</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skills④</span></td><td>模块三设计、Skills④封装。</td></tr>
-          <tr><td class="cell-role">成员</td><td class="cell-name">苗雨晴</td><td>230401428</td><td class="cell-module"><span class="tag" style="background:var(--danger-light);color:var(--danger);">模块四</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">封装Skills训练</span></td><td>模块四设计、封装Skills训练。</td></tr>
+          <tr><td class="cell-role">组长</td><td class="cell-name">杨梦含</td><td>13718760644</td><td class="cell-module"><span class="tag" style="background:var(--primary-lighter);color:var(--primary-darker);">统筹</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">模块五</span></td><td>主题确定、任务分解、进度协调、页面整合、最终汇总。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">方云梦</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--info-light);color:var(--info);">模块一</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill①</span></td><td>模块一设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">朴志恩</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--success-light);color:var(--success);">模块二</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill②</span></td><td>模块二设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">赵雨榕</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--warning-light);color:var(--warning);">模块三</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill③</span></td><td>模块三设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">姚婧媛</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--danger-light);color:var(--danger);">模块四</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill④</span></td><td>模块四设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">赵雨轩</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--primary-lighter);color:var(--primary-darker);">模块五</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill⑤</span></td><td>模块五设计与对应细粒度 Skills 封装。</td></tr>
+          <tr><td class="cell-role">成员</td><td class="cell-name">苗雨晴</td><td>【填写】</td><td class="cell-module"><span class="tag" style="background:var(--info-light);color:var(--info);">模块二</span><span class="tag" style="background:var(--purple-light);color:var(--purple);">Skill②</span></td><td>模块二辅助设计与对应细粒度 Skills 优化。</td></tr>
         </tbody>
       </table>
     </div>
@@ -662,8 +620,8 @@
         </div>
         <span class="tag">模块二</span>
         <h3>HR智能咨询台</h3>
-        <p>概要：覆盖制度、招聘、绩效、薪酬、合规、人才盘点、活水流动、体系规划八大模块的全场景 HR 智能咨询台，提供活水平台专属深度适配，让 HR 管理从经验驱动走向数据驱动。</p>
-        <a href="https://webview.e2b.bj8.sandbox.cloudstudio.club/" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+        <p>概要：【一句话说明】。</p>
+        <a href="#" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
       </div>
       <div class="module-card">
         <div class="module-card-icon" style="background:#FDF3E2;color:#E8A838;">
@@ -671,8 +629,8 @@
         </div>
         <span class="tag">模块三</span>
         <h3>劳动合同签订助手</h3>
-        <p>概要：从合同模板智能生成、条款风险识别到签署流程自动化，帮助 HR 高效合规地完成劳动合同签订全流程，将合同管理从纸质人工操作升级为数字化智能签约。</p>
-        <a href="https://yaojingyuan1105.github.io/hr-contract-system/" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+        <p>概要：【一句话说明】。</p>
+        <a href="https://www.htmlcode.fun/s/hr-contract-system" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
       </div>
       <div class="module-card">
         <div class="module-card-icon" style="background:#FCEAE9;color:#E5655E;">
@@ -680,8 +638,8 @@
         </div>
         <span class="tag">模块四</span>
         <h3>劳动纠纷风险诊断</h3>
-        <p>概要：基于劳动法规与企业用工实践，智能诊断劳动纠纷风险点，输出风险等级评估与处置建议，将事后补救前移为事前预防，降低企业用工法律风险。</p>
-        <a href="https://grand-hummingbird-66fdb3.netlify.app/" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
+        <p>概要：【一句话说明】。</p>
+        <a href="https://www.htmlcode.fun/s/labor-risk-agent" target="_blank" class="btn btn-primary btn-block">点此体验 →</a>
       </div>
       <div class="module-card">
         <div class="module-card-icon" style="background:#EFEDF8;color:#9B8FD4;">
@@ -703,182 +661,43 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       流程：先用 WorkBuddy 设计初版，再用达尔文 / 盘古技能打磨优化、提升得分。
     </div>
-
-    <!-- ═══ Skills 展示区 ═══ -->
-    <section class="skills-showcase">
-
-      <div class="skills-grid cols-3">
-
-        <!-- 内部活水三维匹配引擎 -->
-        <div class="skill-card card-matching">
-          <div class="skill-card-inner">
-            <div class="skill-icon-wrap">
-              <div class="skill-icon-glow"></div>
-              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><path d="M12 12c-4 0-7 2.5-7 5.5V20h14v-2.5c0-3-3-5.5-7-5.5z"/></svg>
-              </div>
-            </div>
-            <div class="skill-name">内部活水三维匹配引擎</div>
-            <div class="skill-en-name">Internal Talent Matching Engine</div>
-            <div class="skill-value">从<strong>技能能力 × 职业意愿 × 岗位需求</strong>三个维度精准计算人岗匹配度，输出 0–100 综合匹配分，解决"人才想动找不到机会、岗位缺人找不到人"的信息错配。</div>
-            <div class="skill-tags">
-              <span class="skill-tag">人岗匹配</span><span class="skill-tag">权重调优</span><span class="skill-tag">匹配报告</span><span class="skill-tag">批量排名</span>
-            </div>
-            <div class="skill-trigger">
-              <span class="skill-trigger-icon">💬</span>
-              <span class="skill-trigger-text">"帮我算一下这个员工和岗位的匹配度" · "谁最适合这个岗位？" · "调整匹配权重，更看重技能"</span>
-            </div>
-          </div>
-          <div class="skill-detail-panel">
-            <div class="skill-detail-row">
-              <div class="skill-detail-col"><div class="skill-detail-label">匹配维度</div><div class="skill-detail-value">技能能力 40% · 职业意愿 30% · 岗位需求 30%</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">核心特性</div><div class="skill-detail-value">硬性条件一票否决 · 核心技能一票否决 · 主动意愿保底 60%</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">输出物</div><div class="skill-detail-value">结构化匹配报告 · 分项得分明细 · 改进建议</div></div>
-            </div>
-            <div class="skill-download">
-              <a href="internal-talent-matching-engine.zip" class="skill-download-btn" download>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                下载技能包
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- HR 管理助手 -->
-        <div class="skill-card card-hr">
-          <div class="skill-card-inner">
-            <div class="skill-icon-wrap">
-              <div class="skill-icon-glow"></div>
-              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-              </div>
-            </div>
-            <div class="skill-name">HR 人力资源管理助手</div>
-            <div class="skill-en-name">HR Management Assistant</div>
-            <div class="skill-value">覆盖<strong>制度、招聘、绩效、薪酬、合规、人才盘点、活水流动、体系规划</strong>八大模块的全场景 HR 智能体，活水平台专属深度适配。</div>
-            <div class="skill-tags">
-              <span class="skill-tag">活水制度设计</span><span class="skill-tag">人才盘点九宫格</span><span class="skill-tag">绩效薪酬</span><span class="skill-tag">劳动合规</span>
-            </div>
-            <div class="skill-trigger">
-              <span class="skill-trigger-icon">💬</span>
-              <span class="skill-trigger-text">"帮我写一份活水管理制度" · "设计一个调岗薪酬衔接方案" · "这个调动有什么合规风险？"</span>
-            </div>
-          </div>
-          <div class="skill-detail-panel">
-            <div class="skill-detail-row">
-              <div class="skill-detail-col"><div class="skill-detail-label">覆盖模块</div><div class="skill-detail-value">制度 · 招聘 · 绩效 · 薪酬 · 合规 · 盘点 · 活水 · 体系</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">活水专属</div><div class="skill-detail-value">活水制度全流程 · 调动薪酬��接 · 合规风险防控 · 漏斗分析</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">联动模块</div><div class="skill-detail-value">竞聘评估 ↔ 人才盘点 ↔ 薪酬合规，横向打通</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 智能招聘大师 -->
-        <div class="skill-card card-recruit" onclick="openSkill('recruitment-expert')">
-          <div class="skill-card-inner">
-            <div class="skill-icon-wrap">
-              <div class="skill-icon-glow"></div>
-              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-            </div>
-            <div class="skill-name">智能招聘大师</div>
-            <div class="skill-en-name">Smart Recruitment Master</div>
-            <div class="skill-value">集团招聘<strong>全流程 AI 助手</strong>——JD 定制、人才画像、简历筛选、笔面试方案、成绩统计、流程可视化，以图表驱动招聘决策。</div>
-            <div class="skill-tags">
-              <span class="skill-tag">JD 定制</span><span class="skill-tag">人才画像</span><span class="skill-tag">笔面试方案</span><span class="skill-tag">成绩分析</span>
-            </div>
-            <div class="skill-trigger">
-              <span class="skill-trigger-icon">💬</span>
-              <span class="skill-trigger-text">"帮我为算法工程师岗位生成 JD" · "这批简历帮我筛选并排名" · "设计一套综合笔试题"</span>
-            </div>
-          </div>
-          <div class="skill-detail-panel">
-            <div class="skill-detail-row">
-              <div class="skill-detail-col"><div class="skill-detail-label">六大能力</div><div class="skill-detail-value">JD定制 · 人才画像 · 简历筛选 · 笔面试方案 · 成绩统计 · 流程管理</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">可视化</div><div class="skill-detail-value">雷达图 · 柱状图 · 饼图 · 流程图 · 进度条 · 星级评分</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">输出格式</div><div class="skill-detail-value">图表展示 + Word 文档导出，考题自动生成</div></div>
-            </div>
-            <div class="skill-download">
-              <a href="recruitment-expert.zip" class="skill-download-btn" download>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                下载技能包
-              </a>
-            </div>
-          </div>
-        </div>
-
+    <div class="grid">
+      <div class="skill-card">
+        <span class="tag">Skill ①</span>
+        <h3>智能招聘大师</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
       </div>
-
-      <div class="skills-grid cols-2">
-
-        <!-- 活水竞争力排行榜 -->
-        <div class="skill-card card-ranking">
-          <div class="skill-card-inner">
-            <div class="skill-icon-wrap">
-              <div class="skill-icon-glow"></div>
-              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 6 9 6 9z"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 18 9 18 9z"/><path d="M4 22h16"/><path d="M10 22V8c0-2 1-3 3-3s3 1 3 3v14"/></svg>
-              </div>
-            </div>
-            <div class="skill-name">活水竞争力排行榜</div>
-            <div class="skill-en-name">Talent Competitiveness Ranking</div>
-            <div class="skill-value">基于<strong>活跃度 × 成功率 × 影响力</strong>三维计分模型，量化员工活水竞争力，生成个人/部门多维度排行榜，让人才活水健康度可感知、可对比。</div>
-            <div class="skill-tags">
-              <span class="skill-tag">PCI 个人指数</span><span class="skill-tag">DHI 部门健康度</span><span class="skill-tag">周期刷新</span><span class="skill-tag">管理驾驶舱</span>
-            </div>
-            <div class="skill-trigger">
-              <span class="skill-trigger-icon">💬</span>
-              <span class="skill-trigger-text">"查看我的活水竞争力排名" · "技术部的活水健康度怎么样？" · "本月 TOP10 活水达人"</span>
-            </div>
-          </div>
-          <div class="skill-detail-panel">
-            <div class="skill-detail-row">
-              <div class="skill-detail-col"><div class="skill-detail-label">计分模型</div><div class="skill-detail-value">活跃度 30% · 成功率 40% · 影响力 30%</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">排行维度</div><div class="skill-detail-value">全公司 / 部门内 / 岗位序列 · 月/季/年刷新</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">可视化</div><div class="skill-detail-value">三维雷达图 · 热力图 · 趋势折线图 · TOP 卡片</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI Team Ops -->
-        <div class="skill-card card-teamops">
-          <div class="skill-card-inner">
-            <div class="skill-icon-wrap">
-              <div class="skill-icon-glow"></div>
-              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-            </div>
-            <div class="skill-name">AI Team Ops</div>
-            <div class="skill-en-name">Team Performance &amp; Meeting Intelligence</div>
-            <div class="skill-value"><strong>Elon Algorithm</strong> 五步团队绩效审计 + 会议智能提取——识别 A/B/C 玩家、冗���角色、瓶颈环节，自动从会议记录中提取行动项与决策。</div>
-            <div class="skill-tags">
-              <span class="skill-tag">绩效审计</span><span class="skill-tag">A/B/C 分级</span><span class="skill-tag">会议行动提取</span><span class="skill-tag">自动化建议</span>
-            </div>
-            <div class="skill-trigger">
-              <span class="skill-trigger-icon">💬</span>
-              <span class="skill-trigger-text">"审计我的团队绩效" · "谁是团队里的 A 级员工？" · "从会议记录里提取所有待办事项"</span>
-            </div>
-          </div>
-          <div class="skill-detail-panel">
-            <div class="skill-detail-row">
-              <div class="skill-detail-col"><div class="skill-detail-label">Elon 算法</div><div class="skill-detail-value">质疑需求 → 删除冗余 → 简化流程 → 加速瓶颈 → 自动化</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">会议智能</div><div class="skill-detail-value">决策 · 行动项 · 待解决问题 · 关键洞察 · 隐式承诺</div></div>
-              <div class="skill-detail-col"><div class="skill-detail-label">评分维度</div><div class="skill-detail-value">速度 · 质量 · 独立性 · 主动性 → Stack Rank</div></div>
-            </div>
-            <div class="skill-download">
-              <a href="team-ops.zip" class="skill-download-btn" download>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                下载技能包
-              </a>
-            </div>
-          </div>
-        </div>
-
+      <div class="skill-card">
+        <span class="tag">Skill ②</span>
+        <h3>内部活水三维匹配引擎</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
       </div>
-
-    </section>
+      <div class="skill-card">
+        <span class="tag">Skill ③</span>
+        <h3>外部人才市场数据参考</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+      <div class="skill-card">
+        <span class="tag">Skill ④</span>
+        <h3>HR人力资源管理</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+      <div class="skill-card">
+        <span class="tag">Skill ⑤</span>
+        <h3>活水竞争力排行榜</h3>
+        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
+        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
+        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+      </div>
+    </div>
 
   </div>
 
@@ -1168,20 +987,6 @@
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape' && overlay.classList.contains('show')) closeSkillModal();
     });
-  </script>
-
-  <!-- Skills 卡片滚动渐入 + 点击高亮 -->
-  <script>
-    (function(){
-      var o=new IntersectionObserver(function(e){e.forEach(function(e){e.isIntersecting&&(e.target.style.opacity='1',e.target.style.transform='translateY(0)')})},{threshold:.1});
-      document.querySelectorAll('.skill-card').forEach(function(c){o.observe(c)});
-      document.querySelectorAll('.skill-card').forEach(function(card){
-        card.addEventListener('click',function(){
-          document.querySelectorAll('.skill-card').forEach(function(c){c.style.borderColor='var(--sk-border-light)';c.style.boxShadow='var(--sk-shadow-sm)'});
-          this.style.borderColor='var(--sk-accent,#A8C4D4)';this.style.boxShadow='var(--sk-shadow-xl)'
-        })
-      })
-    })();
   </script>
 
 </body>
