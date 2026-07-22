@@ -703,186 +703,157 @@
     <!-- ═══ Skills 展示区 ═══ -->
     <section class="skills-showcase">
 
-      <!-- 核心能力层 -->
-      <div class="skills-tier">
-        <div class="tier-label">
-          <div class="tier-label-icon" style="background:#EDF4F8;color:#5B8FA8">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+      <div class="skills-grid cols-3">
+
+        <!-- 内部活水三维匹配引擎 -->
+        <div class="skill-card card-matching">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><path d="M12 12c-4 0-7 2.5-7 5.5V20h14v-2.5c0-3-3-5.5-7-5.5z"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">内部活水三维匹配引擎</div>
+            <div class="skill-en-name">Internal Talent Matching Engine</div>
+            <div class="skill-value">从<strong>技能能力 × 职业意愿 × 岗位需求</strong>三个维度精准计算人岗匹配度，输出 0–100 综合匹配分，解决"人才想动找不到机会、岗位缺人找不到人"的信息错配。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">人岗匹配</span><span class="skill-tag">权重调优</span><span class="skill-tag">匹配报告</span><span class="skill-tag">批量排名</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">💬</span>
+              <span class="skill-trigger-text">"帮我算一下这个员工和岗位的匹配度" · "谁最适合这个岗位？" · "调整匹配权重，更看重技能"</span>
+            </div>
           </div>
-          <span class="tier-label-text">核心能力层</span>
-          <span class="tier-label-line"></span>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col"><div class="skill-detail-label">匹配维度</div><div class="skill-detail-value">技能能力 40% · 职业意愿 30% · 岗位需求 30%</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">核心特性</div><div class="skill-detail-value">硬性条件一票否决 · 核心技能一票否决 · 主动意愿保底 60%</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">输出物</div><div class="skill-detail-value">结构化匹配报告 · 分项得分明细 · 改进建议</div></div>
+            </div>
+          </div>
         </div>
 
-        <div class="skills-grid cols-3">
-
-          <!-- 内部活水三维匹配引擎 -->
-          <div class="skill-card card-matching">
-            <div class="skill-card-inner">
-              <div class="skill-icon-wrap">
-                <div class="skill-icon-glow"></div>
-                <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><path d="M12 12c-4 0-7 2.5-7 5.5V20h14v-2.5c0-3-3-5.5-7-5.5z"/></svg>
-                </div>
-              </div>
-              <div class="skill-name">内部活水三维匹配引擎</div>
-              <div class="skill-en-name">Internal Talent Matching Engine</div>
-              <div class="skill-value">从<strong>技能能力 × 职业意愿 × 岗位需求</strong>三个维度精准计算人岗匹配度，输出 0–100 综合匹配分，解决"人才想动找不到机会、岗位缺人找不到人"的信息错配。</div>
-              <div class="skill-tags">
-                <span class="skill-tag">人岗匹配</span><span class="skill-tag">权重调优</span><span class="skill-tag">匹配报告</span><span class="skill-tag">批量排名</span>
-              </div>
-              <div class="skill-trigger">
-                <span class="skill-trigger-icon">💬</span>
-                <span class="skill-trigger-text">"帮我算一下这个员工和岗位的匹配度" · "谁最适合这个岗位？" · "调整匹配权重，更看重技能"</span>
+        <!-- HR 管理助手 -->
+        <div class="skill-card card-hr">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </div>
             </div>
-            <div class="skill-detail-panel">
-              <div class="skill-detail-row">
-                <div class="skill-detail-col"><div class="skill-detail-label">匹配维度</div><div class="skill-detail-value">技能能力 40% · 职业意愿 30% · 岗位需求 30%</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">核心特性</div><div class="skill-detail-value">硬性条件一票否决 · 核心技能一票否决 · 主动意愿保底 60%</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">输出物</div><div class="skill-detail-value">结构化匹配报告 · 分项得分明细 · 改进建议</div></div>
-              </div>
+            <div class="skill-name">HR 人力资源管理助手</div>
+            <div class="skill-en-name">HR Management Assistant</div>
+            <div class="skill-value">覆盖<strong>制度、招聘、绩效、薪酬、合规、人才盘点、活水流动、体系规划</strong>八大模块的全场景 HR 智能体，活水平台专属深度适配。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">活水制度设计</span><span class="skill-tag">人才盘点九宫格</span><span class="skill-tag">绩效薪酬</span><span class="skill-tag">劳动合规</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">💬</span>
+              <span class="skill-trigger-text">"帮我写一份活水管理制度" · "设计一个调岗薪酬衔接方案" · "这个调动有什么合规风险？"</span>
             </div>
           </div>
-
-          <!-- HR 管理助手 -->
-          <div class="skill-card card-hr">
-            <div class="skill-card-inner">
-              <div class="skill-icon-wrap">
-                <div class="skill-icon-glow"></div>
-                <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                </div>
-              </div>
-              <div class="skill-name">HR 人力资源管理助手</div>
-              <div class="skill-en-name">HR Management Assistant</div>
-              <div class="skill-value">覆盖<strong>制度、招聘、绩效、薪酬、合规、人才盘点、活水流动、体系规划</strong>八大模块的全场景 HR 智能体，活水平台专属深度适配。</div>
-              <div class="skill-tags">
-                <span class="skill-tag">活水制度设计</span><span class="skill-tag">人才盘点九宫格</span><span class="skill-tag">绩效薪酬</span><span class="skill-tag">劳动合规</span>
-              </div>
-              <div class="skill-trigger">
-                <span class="skill-trigger-icon">💬</span>
-                <span class="skill-trigger-text">"帮我写一份活水管理制度" · "设计一个调岗薪酬衔接方案" · "这个调动有什么合规风险？"</span>
-              </div>
-            </div>
-            <div class="skill-detail-panel">
-              <div class="skill-detail-row">
-                <div class="skill-detail-col"><div class="skill-detail-label">覆盖模块</div><div class="skill-detail-value">制度 · 招聘 · 绩效 · 薪酬 · 合规 · 盘点 · 活水 · 体系</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">活水专属</div><div class="skill-detail-value">活水制度全流程 · 调动薪酬衔接 · 合规风险防控 · 漏斗分析</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">联动模块</div><div class="skill-detail-value">竞聘评估 ↔ 人才盘点 ↔ 薪酬合规，横向打通</div></div>
-              </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col"><div class="skill-detail-label">覆盖模块</div><div class="skill-detail-value">制度 · 招聘 · 绩效 · 薪酬 · 合规 · 盘点 · 活水 · 体系</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">活水专属</div><div class="skill-detail-value">活水制度全流程 · 调动薪酬��接 · 合规风险防控 · 漏斗分析</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">联动模块</div><div class="skill-detail-value">竞聘评估 ↔ 人才盘点 ↔ 薪酬合规，横向打通</div></div>
             </div>
           </div>
-
-          <!-- 智能招聘大师 -->
-          <div class="skill-card card-recruit" onclick="openSkill('recruitment-expert')">
-            <div class="skill-card-inner">
-              <div class="skill-icon-wrap">
-                <div class="skill-icon-glow"></div>
-                <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-              </div>
-              <div class="skill-name">智能招聘大师</div>
-              <div class="skill-en-name">Smart Recruitment Master</div>
-              <div class="skill-value">集团招聘<strong>全流程 AI 助手</strong>——JD 定制、人才画像、简历筛选、笔面试方案、成绩统计、流程可视化，以图表驱动招聘决策。</div>
-              <div class="skill-tags">
-                <span class="skill-tag">JD 定制</span><span class="skill-tag">人才画像</span><span class="skill-tag">笔面试方案</span><span class="skill-tag">成绩分析</span>
-              </div>
-              <div class="skill-trigger">
-                <span class="skill-trigger-icon">💬</span>
-                <span class="skill-trigger-text">"帮我为算法工程师岗位生成 JD" · "这批简历帮我筛选并排名" · "设计一套综合笔试题"</span>
-              </div>
-            </div>
-            <div class="skill-detail-panel">
-              <div class="skill-detail-row">
-                <div class="skill-detail-col"><div class="skill-detail-label">六大能力</div><div class="skill-detail-value">JD定制 · 人才画像 · 简历筛选 · 笔面试方案 · 成绩统计 · 流程管理</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">可视化</div><div class="skill-detail-value">雷达图 · 柱状图 · 饼图 · 流程图 · 进度条 · 星级评分</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">输出格式</div><div class="skill-detail-value">图表展示 + Word 文档导出，考题自动生成</div></div>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        <!-- 智能招聘大师 -->
+        <div class="skill-card card-recruit" onclick="openSkill('recruitment-expert')">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">智能招聘大师</div>
+            <div class="skill-en-name">Smart Recruitment Master</div>
+            <div class="skill-value">集团招聘<strong>全流程 AI 助手</strong>——JD 定制、人才画像、简历筛选、笔面试方案、成绩统计、流程可视化，以图表驱动招聘决策。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">JD 定制</span><span class="skill-tag">人才画像</span><span class="skill-tag">笔面试方案</span><span class="skill-tag">成绩分析</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">💬</span>
+              <span class="skill-trigger-text">"帮我为算法工程师岗位生成 JD" · "这批简历帮我筛选并排名" · "设计一套综合笔试题"</span>
+            </div>
+          </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col"><div class="skill-detail-label">六大能力</div><div class="skill-detail-value">JD定制 · 人才画像 · 简历筛选 · 笔面试方案 · 成绩统计 · 流程管理</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">可视化</div><div class="skill-detail-value">雷达图 · 柱状图 · 饼图 · 流程图 · 进度条 · 星级评分</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">输出格式</div><div class="skill-detail-value">图表展示 + Word 文档导出，考题自动生成</div></div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- 连接线 -->
-      <div class="connection-hint">
-        <span class="connection-dots"><span></span><span></span><span></span></span>
-        数据洞察与态势感知
-        <span class="connection-dots"><span></span><span></span><span></span></span>
-      </div>
+      <div class="skills-grid cols-2">
 
-      <!-- 数据洞察层 -->
-      <div class="skills-tier">
-        <div class="tier-label">
-          <div class="tier-label-icon" style="background:#FDF3E2;color:#E8A838">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <!-- 活水竞争力排行榜 -->
+        <div class="skill-card card-ranking">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 6 9 6 9z"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 18 9 18 9z"/><path d="M4 22h16"/><path d="M10 22V8c0-2 1-3 3-3s3 1 3 3v14"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">活水竞争力排行榜</div>
+            <div class="skill-en-name">Talent Competitiveness Ranking</div>
+            <div class="skill-value">基于<strong>活跃度 × 成功率 × 影响力</strong>三维计分模型，量化员工活水竞争力，生成个人/部门多维度排行榜，让人才活水健康度可感知、可对比。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">PCI 个人指数</span><span class="skill-tag">DHI 部门健康度</span><span class="skill-tag">周期刷新</span><span class="skill-tag">管理驾驶舱</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">💬</span>
+              <span class="skill-trigger-text">"查看我的活水竞争力排名" · "技术部的活水健康度怎么样？" · "本月 TOP10 活水达人"</span>
+            </div>
           </div>
-          <span class="tier-label-text">数据洞察层</span>
-          <span class="tier-label-line"></span>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col"><div class="skill-detail-label">计分模型</div><div class="skill-detail-value">活跃度 30% · 成功率 40% · 影响力 30%</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">排行维度</div><div class="skill-detail-value">全公司 / 部门内 / 岗位序列 · 月/季/年刷新</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">可视化</div><div class="skill-detail-value">三维雷达图 · 热力图 · 趋势折线图 · TOP 卡片</div></div>
+            </div>
+          </div>
         </div>
 
-        <div class="skills-grid cols-2">
-
-          <!-- 活水竞争力排行榜 -->
-          <div class="skill-card card-ranking">
-            <div class="skill-card-inner">
-              <div class="skill-icon-wrap">
-                <div class="skill-icon-glow"></div>
-                <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 6 9 6 9z"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 18 9 18 9z"/><path d="M4 22h16"/><path d="M10 22V8c0-2 1-3 3-3s3 1 3 3v14"/></svg>
-                </div>
-              </div>
-              <div class="skill-name">活水竞争力排行榜</div>
-              <div class="skill-en-name">Talent Competitiveness Ranking</div>
-              <div class="skill-value">基于<strong>活跃度 × 成功率 × 影响力</strong>三维计分模型，量化员工活水竞争力，生成个人/部门多维度排行榜，让人才活水健康度可感知、可对比。</div>
-              <div class="skill-tags">
-                <span class="skill-tag">PCI 个人指数</span><span class="skill-tag">DHI 部门健康度</span><span class="skill-tag">周期刷新</span><span class="skill-tag">管理驾驶舱</span>
-              </div>
-              <div class="skill-trigger">
-                <span class="skill-trigger-icon">💬</span>
-                <span class="skill-trigger-text">"查看我的活水竞争力排名" · "技术部的活水健康度怎么样？" · "本月 TOP10 活水达人"</span>
+        <!-- AI Team Ops -->
+        <div class="skill-card card-teamops">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
             </div>
-            <div class="skill-detail-panel">
-              <div class="skill-detail-row">
-                <div class="skill-detail-col"><div class="skill-detail-label">计分模型</div><div class="skill-detail-value">活跃度 30% · 成功率 40% · 影响力 30%</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">排行维度</div><div class="skill-detail-value">全公司 / 部门内 / 岗位序列 · 月/季/年刷新</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">可视化</div><div class="skill-detail-value">三维雷达图 · 热力图 · 趋势折线图 · TOP 卡片</div></div>
-              </div>
+            <div class="skill-name">AI Team Ops</div>
+            <div class="skill-en-name">Team Performance &amp; Meeting Intelligence</div>
+            <div class="skill-value"><strong>Elon Algorithm</strong> 五步团队绩效审计 + 会议智能提取——识别 A/B/C 玩家、冗���角色、瓶颈环节，自动从会议记录中提取行动项与决策。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">绩效审计</span><span class="skill-tag">A/B/C 分级</span><span class="skill-tag">会议行动提取</span><span class="skill-tag">自动化建议</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">💬</span>
+              <span class="skill-trigger-text">"审计我的团队绩效" · "谁是团队里的 A 级员工？" · "从会议记录里提取所有待办事项"</span>
             </div>
           </div>
-
-          <!-- AI Team Ops -->
-          <div class="skill-card card-teamops">
-            <div class="skill-card-inner">
-              <div class="skill-icon-wrap">
-                <div class="skill-icon-glow"></div>
-                <div class="skill-icon" style="background:var(--sk-icon-bg);color:var(--sk-icon-color)">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-              </div>
-              <div class="skill-name">AI Team Ops</div>
-              <div class="skill-en-name">Team Performance &amp; Meeting Intelligence</div>
-              <div class="skill-value"><strong>Elon Algorithm</strong> 五步团队绩效审计 + 会议智能提取——识别 A/B/C 玩家、冗余角色、瓶颈环节，自动从会议记录中提取行动项与决策。</div>
-              <div class="skill-tags">
-                <span class="skill-tag">绩效审计</span><span class="skill-tag">A/B/C 分级</span><span class="skill-tag">会议行动提取</span><span class="skill-tag">自动化建议</span>
-              </div>
-              <div class="skill-trigger">
-                <span class="skill-trigger-icon">💬</span>
-                <span class="skill-trigger-text">"审计我的团队绩效" · "谁是团队里的 A 级员工？" · "从会议记录里提取所有待办事项"</span>
-              </div>
-            </div>
-            <div class="skill-detail-panel">
-              <div class="skill-detail-row">
-                <div class="skill-detail-col"><div class="skill-detail-label">Elon 算法</div><div class="skill-detail-value">质疑需求 → 删除冗余 → 简化流程 → 加速瓶颈 → 自动化</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">会议智能</div><div class="skill-detail-value">决策 · 行动项 · 待解决问题 · 关键洞察 · 隐式承诺</div></div>
-                <div class="skill-detail-col"><div class="skill-detail-label">评分维度</div><div class="skill-detail-value">速度 · 质量 · 独立性 · 主动性 → Stack Rank</div></div>
-              </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col"><div class="skill-detail-label">Elon 算法</div><div class="skill-detail-value">质疑需求 → 删除冗余 → 简化流程 → 加速瓶颈 → 自动化</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">会议智能</div><div class="skill-detail-value">决策 · 行动项 · 待解决问题 · 关键洞察 · 隐式承诺</div></div>
+              <div class="skill-detail-col"><div class="skill-detail-label">评分维度</div><div class="skill-detail-value">速度 · 质量 · 独立性 · 主动性 → Stack Rank</div></div>
             </div>
           </div>
-
         </div>
+
       </div>
 
     </section>
