@@ -892,4 +892,431 @@ const Admin = {
       this.inviteMgmt();
     }, '确认撤销');
   },
+
+  // ==================== Skills 引擎 ====================
+  skillsEngine() {
+    const c = document.getElementById('viewContainer');
+    const skills = [
+      {
+        num: '01', name: '内部活水三维匹配引擎', enName: 'Internal Talent Matching Engine',
+        icon: '\u{1F9E0}', accent: '#5B8FA8', bg: '#EDF4F8',
+        desc: '从技能能力 × 职业意愿 × 岗位需求三个维度精准计算人岗匹配度，输出 0–100 综合匹配分，解决"人才想动找不到机会、岗位缺人找不到人"的信息错配。',
+        tags: ['人岗匹配', '权重调优', '匹配报告', '批量排名'],
+        trigger: '"帮我算一下这个员工和岗位的匹配度" · "谁最适合这个岗位？" · "调整匹配权重，更看重技能"',
+        details: [
+          { label: '匹配维度', value: '技能能力 40% · 职业意愿 30% · 岗位需求 30%' },
+          { label: '核心特性', value: '硬性条件一票否决 · 核心技能一票否决 · 主动意愿保底 60%' },
+          { label: '输出物', value: '结构化匹配报告 · 分项得分明细 · 改进建议' },
+        ],
+      },
+      {
+        num: '02', name: 'HR 人力资源管理助手', enName: 'HR Management Assistant',
+        icon: '\u{1F4BC}', accent: '#4CAF7C', bg: '#E8F6EE',
+        desc: '覆盖制度、招聘、绩效、薪酬、合规、人才盘点、活水流动、体系规划八大模块的全场景 HR 智能体，活水平台专属深度适配。',
+        tags: ['活水制度设计', '人才盘点九宫格', '绩效薪酬', '劳动合规'],
+        trigger: '"帮我写一份活水管理制度" · "设计一个调岗薪酬衔接方案" · "这个调动有什么合规风险？"',
+        details: [
+          { label: '覆盖模块', value: '制度 · 招聘 · 绩效 · 薪酬 · 合规 · 盘点 · 活水 · 体系' },
+          { label: '活水专属', value: '活水制度全流程 · 调动薪酬衔接 · 合规风险防控 · 漏斗分析' },
+          { label: '联动模块', value: '竞聘评估 ↔ 人才盘点 ↔ 薪酬合规，横向打通' },
+        ],
+      },
+      {
+        num: '03', name: '智能招聘大师', enName: 'Smart Recruitment Master',
+        icon: '\u{1F465}', accent: '#9B8FD4', bg: '#EFEDF8',
+        desc: '集团招聘全流程 AI 助手——JD 定制、人才画像、简历筛选、笔面试方案、成绩统计、流程可视化，以图表驱动招聘决策。',
+        tags: ['JD 定制', '人才画像', '笔面试方案', '成绩分析'],
+        trigger: '"帮我为算法工程师岗位生成 JD" · "这批简历帮我筛选并排名" · "设计一套综合笔试题"',
+        details: [
+          { label: '六大能力', value: 'JD定制 · 人才画像 · 简历筛选 · 笔面试方案 · 成绩统计 · 流程管理' },
+          { label: '可视化', value: '雷达图 · 柱状图 · 饼图 · 流程图 · 进度条 · 星级评分' },
+          { label: '输出格式', value: '图表展示 + Word 文档导出，考题自动生成' },
+        ],
+      },
+      {
+        num: '04', name: '活水竞争力排行榜', enName: 'Talent Competitiveness Ranking',
+        icon: '\u{1F3C6}', accent: '#E8A838', bg: '#FDF3E2',
+        desc: '基于活跃度 × 成功率 × 影响力三维计分模型，量化员工活水竞争力，生成个人/部门多维度排行榜，让人才活水健康度可感知、可对比。',
+        tags: ['PCI 个人指数', 'DHI 部门健康度', '周期刷新', '管理驾驶舱'],
+        trigger: '"查看我的活水竞争力排名" · "技术部的活水健康度怎么样？" · "本月 TOP10 活水达人"',
+        details: [
+          { label: '计分模型', value: '活跃度 30% · 成功率 40% · 影响力 30%' },
+          { label: '排行维度', value: '全公司 / 部门内 / 岗位序列 · 月/季/年刷新' },
+          { label: '可视化', value: '三维雷达图 · 热力图 · 趋势折线图 · TOP 卡片' },
+        ],
+      },
+      {
+        num: '05', name: 'AI Team Ops', enName: 'Team Performance & Meeting Intelligence',
+        icon: '\u{2699}\u{FE0F}', accent: '#E5655E', bg: '#FCEAE9',
+        desc: 'Elon Algorithm 五步团队绩效审计 + 会议智能提取——识别 A/B/C 玩家、冗余角色、瓶颈环节，自动从会议记录中提取行动项与决策。',
+        tags: ['绩效审计', 'A/B/C 分级', '会议行动提取', '自动化建议'],
+        trigger: '"审计我的团队绩效" · "谁是团队里的 A 级员工？" · "从会议记录里提取所有待办事项"',
+        details: [
+          { label: 'Elon 算法', value: '质疑需求 → 删除冗余 → 简化流程 → 加速瓶颈 → 自动化' },
+          { label: '会议智能', value: '决策 · 行动项 · 待解决问题 · 关键洞察 · 隐式承诺' },
+          { label: '评分维度', value: '速度 · 质量 · 独立性 · 主动性 → Stack Rank' },
+        ],
+      },
+    ];
+
+    c.innerHTML = `
+      <div class="page-header">
+        <div class="page-header-left">
+          <h2>Skills 引擎中心</h2>
+          <span class="page-subtitle">五大 AI Skills 驱动活水平台全流程智能化</span>
+        </div>
+      </div>
+
+      <!-- 概览统计 -->
+      <div class="stat-cards" style="margin-bottom:24px">
+        <div class="stat-card" style="--card-accent:#5B8FA8;--card-icon-bg:#EDF4F8">
+          <div class="stat-card-icon" style="color:#5B8FA8">${App.icon('book')}</div>
+          <div class="stat-card-label">封装 Skills</div>
+          <div class="stat-card-value">5 个</div>
+          <div class="stat-card-trend trend-up">↑ 全流程覆盖</div>
+        </div>
+        <div class="stat-card" style="--card-accent:#4CAF7C;--card-icon-bg:#E8F6EE">
+          <div class="stat-card-icon" style="color:#4CAF7C">${App.icon('check')}</div>
+          <div class="stat-card-label">可独立调用</div>
+          <div class="stat-card-value">5 / 5</div>
+          <div class="stat-card-trend trend-up">↑ 彼此支持</div>
+        </div>
+        <div class="stat-card" style="--card-accent:#E8A838;--card-icon-bg:#FDF3E2">
+          <div class="stat-card-icon" style="color:#E8A838">${App.icon('link')}</div>
+          <div class="stat-card-label">联动模块</div>
+          <div class="stat-card-value">3 组</div>
+          <div class="stat-card-trend trend-up">↑ 横向打通</div>
+        </div>
+        <div class="stat-card" style="--card-accent:#9B8FD4;--card-icon-bg:#EFEDF8">
+          <div class="stat-card-icon" style="color:#9B8FD4">${App.icon('award')}</div>
+          <div class="stat-card-label">优化轮次</div>
+          <div class="stat-card-value">2 轮</div>
+          <div class="stat-card-trend trend-up">↑ 达尔文/盘古</div>
+        </div>
+      </div>
+
+      <!-- Skills 卡片列表 -->
+      <div class="chart-grid" style="grid-template-columns:1fr;gap:20px">
+        ${skills.map(sk => `
+          <div class="card" style="border-left:4px solid ${sk.accent};overflow:hidden">
+            <div style="display:flex;gap:20px;align-items:flex-start;padding:4px">
+              <!-- 图标区 -->
+              <div style="width:64px;height:64px;border-radius:14px;background:${sk.bg};display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0">
+                ${sk.icon}
+              </div>
+              <!-- 内容区 -->
+              <div style="flex:1;min-width:0">
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+                  <span style="font-size:0.7rem;font-weight:700;color:${sk.accent};background:${sk.bg};padding:2px 10px;border-radius:20px;letter-spacing:1px">SKILL ${sk.num}</span>
+                  <h3 style="font-size:1.1rem;font-weight:700;margin:0">${sk.name}</h3>
+                </div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:10px;letter-spacing:0.5px">${sk.enName}</div>
+                <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px">${sk.desc}</p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+                  ${sk.tags.map(t => `<span class="tag" style="background:${sk.bg};color:${sk.accent};font-size:0.72rem;font-weight:500;padding:3px 10px;border-radius:20px">${t}</span>`).join('')}
+                </div>
+                <!-- 详细信息 -->
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;padding-top:12px;border-top:1px solid var(--border-light)">
+                  ${sk.details.map(d => `
+                    <div>
+                      <div style="font-size:0.68rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">${d.label}</div>
+                      <div style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5">${d.value}</div>
+                    </div>
+                  `).join('')}
+                </div>
+                <!-- 触发词 -->
+                <div style="margin-top:12px;padding:10px 14px;background:var(--bg-body);border-radius:var(--radius-md);display:flex;align-items:flex-start;gap:8px">
+                  <span style="font-size:0.9rem;flex-shrink:0">\u{1F4AC}</span>
+                  <span style="font-size:0.78rem;color:var(--text-muted);line-height:1.5">${sk.trigger}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- 联动关系说明 -->
+      <div class="card section-gap">
+        <div class="card-header"><h3>\u{1F504} Skills 联动关系</h3></div>
+        <div style="padding:16px 0">
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:0.82rem">
+            <span style="padding:8px 16px;background:#EDF4F8;color:#5B8FA8;border-radius:20px;font-weight:600">三维匹配引擎</span>
+            <span style="color:var(--text-muted)">\u2194</span>
+            <span style="padding:8px 16px;background:#E8F6EE;color:#4CAF7C;border-radius:20px;font-weight:600">HR 管理助手</span>
+            <span style="color:var(--text-muted)">\u2194</span>
+            <span style="padding:8px 16px;background:#FDF3E2;color:#E8A838;border-radius:20px;font-weight:600">竞争力排行榜</span>
+          </div>
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:12px">竞聘评估 \u2194 人才盘点 \u2194 薪酬合规，三大 Skills 横向打通，形成活水全闭环</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:0.82rem;margin-top:16px">
+            <span style="padding:8px 16px;background:#EFEDF8;color:#9B8FD4;border-radius:20px;font-weight:600">智能招聘大师</span>
+            <span style="color:var(--text-muted)">+</span>
+            <span style="padding:8px 16px;background:#FCEAE9;color:#E5655E;border-radius:20px;font-weight:600">AI Team Ops</span>
+            <span style="color:var(--text-muted)">\u2192</span>
+            <span style="font-size:0.78rem;color:var(--text-secondary)">外部招聘与团队效能赋能</span>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // ==================== 竞争力排行榜 ====================
+  ranking() {
+    const c = document.getElementById('viewContainer');
+    const talents = Store.getTalents();
+    const flow = Store.getDeptFlow();
+
+    // 计算 PCI（个人竞争力指数）
+    const levelScore = { 'P4': 55, 'P5': 70, 'P6': 85, 'P7': 100, 'M1': 80, 'M2': 90, 'M3': 95 };
+    const statusActivity = { 'available': 90, 'matching': 75, 'matched': 55, 'completed': 35 };
+    const statusSuccess = { 'available': 40, 'matching': 60, 'matched': 85, 'completed': 100 };
+
+    const pciData = talents.map(t => {
+      const activity = statusActivity[t.status] || 50;
+      const success = statusSuccess[t.status] || 50;
+      const latestPerf = t.performanceHistory[t.performanceHistory.length - 1]?.rating || 'B';
+      const perfBonus = { 'A': 10, 'B': 5, 'C': 0, 'D': -5 }[latestPerf] || 5;
+      const influence = Math.min(100, (levelScore[t.level] || 60) + perfBonus);
+      const pci = Math.round(activity * 0.3 + success * 0.4 + influence * 0.3);
+      return { ...t, activity, success, influence, pci, latestPerf };
+    }).sort((a, b) => b.pci - a.pci);
+
+    // 计算 DHI（部门健康度指数）
+    const deptStats = {};
+    DEPARTMENTS.forEach(d => { deptStats[d] = { dept: d, members: [], totalPCI: 0, count: 0, inflow: 0, outflow: 0, net: 0 }; });
+    pciData.forEach(t => {
+      if (deptStats[t.currentDept]) {
+        deptStats[t.currentDept].members.push(t);
+        deptStats[t.currentDept].totalPCI += t.pci;
+        deptStats[t.currentDept].count++;
+      }
+    });
+    flow.summary.forEach(s => {
+      if (deptStats[s.dept]) {
+        deptStats[s.dept].inflow = s.inflow;
+        deptStats[s.dept].outflow = s.outflow;
+        deptStats[s.dept].net = s.net;
+      }
+    });
+
+    const dhiData = Object.values(deptStats)
+      .filter(d => d.count > 0)
+      .map(d => {
+        const avgPCI = d.count > 0 ? d.totalPCI / d.count : 0;
+        const flowHealth = Math.min(100, 60 + d.net * 8);
+        const participation = Math.min(100, d.count * 15);
+        const dhi = Math.round(avgPCI * 0.5 + flowHealth * 0.3 + participation * 0.2);
+        return { ...d, avgPCI: Math.round(avgPCI), flowHealth, participation, dhi };
+      })
+      .sort((a, b) => b.dhi - a.dhi);
+
+    const pciTop3 = pciData.slice(0, 3);
+    const dhiTop3 = dhiData.slice(0, 3);
+    const medalColors = ['#E8A838', '#B0B8C0', '#CD7F32'];
+    const medalLabels = ['\u{1F947}', '\u{1F948}', '\u{1F949}'];
+
+    c.innerHTML = `
+      <div class="page-header">
+        <div class="page-header-left">
+          <h2>活水竞争力排行榜</h2>
+          <span class="page-subtitle">基于活跃度 \u00D7 成功率 \u00D7 影响力三维计分模型 · PCI 个人指数 + DHI 部门健康度</span>
+        </div>
+      </div>
+
+      <!-- 模型说明 -->
+      <div class="card" style="margin-bottom:20px;background:linear-gradient(135deg,#EDF4F8,#D4E5EE);border:none">
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:8px 0">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem">\u{1F4CA}</div>
+            <div>
+              <div style="font-size:0.85rem;font-weight:700">三维计分模型</div>
+              <div style="font-size:0.72rem;color:var(--text-muted)">活跃度 30% \u00D7 成功率 40% \u00D7 影响力 30%</div>
+            </div>
+          </div>
+          <div style="height:28px;width:1px;background:var(--border)"></div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <div><span style="font-size:0.7rem;color:var(--text-muted)">PCI</span><span style="font-size:0.85rem;font-weight:700;color:var(--primary-darker);margin-left:4px">个人竞争力指数</span></div>
+            <div><span style="font-size:0.7rem;color:var(--text-muted)">DHI</span><span style="font-size:0.85rem;font-weight:700;color:var(--warning);margin-left:4px">部门健康度指数</span></div>
+          </div>
+          <div style="margin-left:auto">
+            <select class="filter-select" style="font-size:0.82rem" onchange="App.toast('周期已切换','info')">
+              <option>本月</option><option>本季度</option><option>本年度</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP3 个人 -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px">
+        ${pciTop3.map((t, i) => `
+          <div class="card" style="text-align:center;border-top:3px solid ${medalColors[i]};position:relative;overflow:hidden">
+            <div style="position:absolute;top:8px;right:12px;font-size:1.8rem;opacity:0.15">${medalLabels[i]}</div>
+            <div style="font-size:2rem;margin:8px 0">${medalLabels[i]}</div>
+            <div class="manager-avatar" style="margin:0 auto 8px;width:48px;height:48px;font-size:1.2rem;background:${medalColors[i]}">${t.avatar}</div>
+            <div style="font-weight:700;font-size:0.95rem">${t.name}</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:8px">${t.currentDept} \u00B7 ${t.currentPosition}</div>
+            <div style="font-size:1.8rem;font-weight:800;color:${medalColors[i]}">${t.pci}</div>
+            <div style="font-size:0.72rem;color:var(--text-muted)">PCI 指数</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="chart-grid">
+        <!-- PCI 个人排行 -->
+        <div class="chart-card chart-lg">
+          <div class="card-header">
+            <h3>PCI 个人竞争力排行</h3>
+            <span class="chart-badge">全公司 \u00B7 ${pciData.length} 人</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>排名</th><th>姓名</th><th>部门</th><th>岗位</th><th>级别</th><th>活跃度</th><th>成功率</th><th>影响力</th><th>PCI</th></tr>
+              </thead>
+              <tbody>
+                ${pciData.map((t, i) => `
+                  <tr>
+                    <td style="font-weight:700;color:${i < 3 ? medalColors[i] : 'var(--text-muted)'}">${i < 3 ? medalLabels[i] : '#' + (i + 1)}</td>
+                    <td class="cell-name">${t.name}</td>
+                    <td>${t.currentDept}</td>
+                    <td style="font-size:0.8rem">${t.currentPosition}</td>
+                    <td><span class="tag" style="font-size:0.68rem">${t.level}</span></td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <div style="width:40px;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden"><div style="height:100%;width:${t.activity}%;background:#6BAED6;border-radius:3px"></div></div>
+                        <span style="font-size:0.75rem;color:var(--text-muted)">${t.activity}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <div style="width:40px;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden"><div style="height:100%;width:${t.success}%;background:#4CAF7C;border-radius:3px"></div></div>
+                        <span style="font-size:0.75rem;color:var(--text-muted)">${t.success}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <div style="width:40px;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden"><div style="height:100%;width:${t.influence}%;background:#E8A838;border-radius:3px"></div></div>
+                        <span style="font-size:0.75rem;color:var(--text-muted)">${t.influence}</span>
+                      </div>
+                    </td>
+                    <td><span style="font-size:1rem;font-weight:800;color:${App.scoreColor(t.pci)}">${t.pci}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DHI 部门排行 -->
+        <div class="chart-card">
+          <div class="card-header">
+            <h3>DHI 部门健康度排行</h3>
+            <span class="chart-badge">${dhiData.length} 个部门</span>
+          </div>
+          <div id="dhiChart" style="height:280px;padding:12px"></div>
+          <div style="padding:0 12px 12px">
+            ${dhiData.slice(0, 5).map((d, i) => `
+              <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-light)">
+                <span style="font-weight:700;color:${i < 3 ? medalColors[i] : 'var(--text-muted)'};width:24px;text-align:center">${i < 3 ? medalLabels[i] : '#' + (i + 1)}</span>
+                <div style="flex:1">
+                  <div style="font-weight:600;font-size:0.85rem">${d.dept}</div>
+                  <div style="font-size:0.7rem;color:var(--text-muted)">${d.count} 人 \u00B7 均值 PCI ${d.avgPCI} \u00B7 净${d.net >= 0 ? '流入' : '流出'} ${Math.abs(d.net)}</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-size:1.2rem;font-weight:800;color:${App.scoreColor(d.dhi)}">${d.dhi}</div>
+                  <div style="font-size:0.65rem;color:var(--text-muted)">DHI</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- DHI 详细表格 -->
+      <div class="card section-gap">
+        <div class="card-header"><h3>DHI 部门健康度明细</h3></div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>排名</th><th>部门</th><th>人数</th><th>均 PCI</th><th>流入</th><th>流出</th><th>净流动</th><th>流动健康度</th><th>参与度</th><th>DHI</th></tr>
+            </thead>
+            <tbody>
+              ${dhiData.map((d, i) => `
+                <tr>
+                  <td style="font-weight:700;color:${i < 3 ? medalColors[i] : 'var(--text-muted)'}">${i < 3 ? medalLabels[i] : '#' + (i + 1)}</td>
+                  <td class="cell-name">${d.dept}</td>
+                  <td>${d.count}</td>
+                  <td>${d.avgPCI}</td>
+                  <td style="color:var(--success);font-weight:600">+${d.inflow}</td>
+                  <td style="color:var(--danger);font-weight:600">-${d.outflow}</td>
+                  <td style="color:${d.net >= 0 ? 'var(--success)' : 'var(--danger)'};font-weight:700">${d.net >= 0 ? '+' : ''}${d.net}</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:6px">
+                      <div style="width:50px;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden"><div style="height:100%;width:${d.flowHealth}%;background:#5B8FA8;border-radius:3px"></div></div>
+                      <span style="font-size:0.75rem;color:var(--text-muted)">${d.flowHealth}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:6px">
+                      <div style="width:50px;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden"><div style="height:100%;width:${d.participation}%;background:#9B8FD4;border-radius:3px"></div></div>
+                      <span style="font-size:0.75rem;color:var(--text-muted)">${d.participation}</span>
+                    </div>
+                  </td>
+                  <td><span style="font-size:1rem;font-weight:800;color:${App.scoreColor(d.dhi)}">${d.dhi}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 图表区 -->
+      <div class="chart-grid" style="margin-top:20px">
+        <div class="chart-card chart-lg">
+          <div class="card-header"><h3>PCI 分布雷达图（TOP10）</h3></div>
+          <div class="chart-body"><canvas id="pciRadarChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="card-header"><h3>DHI 部门对比</h3></div>
+          <div class="chart-body"><canvas id="dhiBarChart"></canvas></div>
+        </div>
+      </div>
+    `;
+
+    // 渲染雷达图
+    const top10 = pciData.slice(0, 10);
+    const radarCtx = document.getElementById('pciRadarChart').getContext('2d');
+    App.charts.pciRadar = new Chart(radarCtx, {
+      type: 'radar',
+      data: {
+        labels: top10.map(t => t.name),
+        datasets: [
+          { label: '活跃度', data: top10.map(t => t.activity), borderColor: '#6BAED6', backgroundColor: 'rgba(107,174,214,0.1)', borderWidth: 2 },
+          { label: '成功率', data: top10.map(t => t.success), borderColor: '#4CAF7C', backgroundColor: 'rgba(76,175,124,0.1)', borderWidth: 2 },
+          { label: '影响力', data: top10.map(t => t.influence), borderColor: '#E8A838', backgroundColor: 'rgba(232,168,56,0.1)', borderWidth: 2 },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { padding: 12, font: { size: 12, family: 'Noto Sans SC' }, usePointStyle: true } } },
+        scales: { r: { beginAtZero: true, max: 100, ticks: { stepSize: 25, font: { size: 10 } }, grid: { color: '#EDF1F5' }, pointLabels: { font: { size: 11, family: 'Noto Sans SC' } } } },
+      },
+    });
+
+    // 渲染部门柱状图
+    const barCtx = document.getElementById('dhiBarChart').getContext('2d');
+    App.charts.dhiBar = new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: dhiData.map(d => d.dept),
+        datasets: [{
+          label: 'DHI',
+          data: dhiData.map(d => d.dhi),
+          backgroundColor: dhiData.map(d => App.scoreColor(d.dhi)),
+          borderRadius: 6,
+          maxBarThickness: 36,
+        }],
+      },
+      options: this.chartOpts({ legend: false, indexAxis: 'y' }),
+    });
+  },
 };

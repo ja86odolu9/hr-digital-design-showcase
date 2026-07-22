@@ -28,6 +28,8 @@ const App = {
     // 驾驶舱
     'admin-dashboard':  { title: '健康驾驶舱', render: () => Admin.dashboard(), role: 'admin', group: '数据洞察' },
     'admin-heatmap':    { title: '流动热力图', render: () => Admin.heatmap(), role: 'admin', group: '数据洞察' },
+    'admin-skills':     { title: 'Skills 引擎', render: () => Admin.skillsEngine(), role: 'admin', group: '智能引擎' },
+    'admin-ranking':    { title: '竞争力排行榜', render: () => Admin.ranking(), role: 'admin', group: '智能引擎' },
     'admin-rules':      { title: '规则配置', render: () => Admin.rules(), role: 'admin', group: '运营管理' },
     'admin-ops':        { title: '运营促活', render: () => Admin.operations(), role: 'admin', group: '运营管理' },
     'admin-community':  { title: '活水社区', render: () => Admin.community(), role: 'admin', group: '运营管理' },
@@ -62,6 +64,10 @@ const App = {
       { group: '数据洞察', items: [
         { route: 'admin-dashboard', label: '健康驾驶舱', icon: 'dashboard' },
         { route: 'admin-heatmap', label: '流动热力图', icon: 'heatmap' },
+      ]},
+      { group: '智能引擎', items: [
+        { route: 'admin-skills', label: 'Skills 引擎', icon: 'skills' },
+        { route: 'admin-ranking', label: '竞争力排行榜', icon: 'ranking' },
       ]},
       { group: '运营管理', items: [
         { route: 'admin-rules', label: '规则配置', icon: 'rules' },
@@ -453,6 +459,8 @@ const App = {
       refresh: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.5 2.6L21 8"/><path d="M21 3v5h-5"/></svg>',
       plus: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
       lock: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+      skills: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
+      ranking: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>',
     };
     return icons[name] || '';
   },
