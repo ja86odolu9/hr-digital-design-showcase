@@ -174,33 +174,70 @@
     .module-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; line-height: 1.6; }
     .module-card .btn { margin-top: 16px; }
 
-    /* Skills 卡片（紫色系） */
+    /* ===================== Skills 展示区（新版） ===================== */
+    .skills-showcase { max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; }
+    .skills-tier { margin-bottom: 48px; }
+    .tier-label { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-left: 4px; }
+    .tier-label-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .tier-label-text { font-size: 0.92rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.5px; flex-shrink: 0; }
+    .tier-label-line { flex: 1; height: 1px; background: #E2E8ED; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+    @media (min-width: 1200px) { .skills-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } .skills-grid.cols-2 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .skills-grid { grid-template-columns: 1fr; gap: 16px; } .skills-showcase { padding: 0 16px 48px; } }
     .skill-card {
-      background: var(--bg-card); border-radius: var(--radius-xl); padding: 28px 24px;
-      box-shadow: var(--shadow-sm); border: 1px solid #E8E3F5;
-      transition: var(--transition); display: flex; flex-direction: column;
-      position: relative; overflow: hidden;
+      position: relative; background: #fff; border-radius: 24px; border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer; overflow: hidden; display: flex; flex-direction: column;
+      animation: skFadeIn 0.5s ease both;
     }
+    .skill-card:nth-child(1) { animation-delay: 0.1s; }
+    .skill-card:nth-child(2) { animation-delay: 0.2s; }
+    .skill-card:nth-child(3) { animation-delay: 0.3s; }
+    .skill-card:nth-child(4) { animation-delay: 0.4s; }
+    .skill-card:nth-child(5) { animation-delay: 0.5s; }
     .skill-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--purple);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--sk-accent, #A8C4D4); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .skill-card:hover {
-      box-shadow: var(--shadow-lg); transform: translateY(-4px);
-      border-color: var(--purple);
-    }
-    .skill-card .tag {
-      display: inline-block; background: var(--purple-light);
-      color: var(--purple); font-size: 0.72rem; font-weight: 600;
-      padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; width: fit-content;
-    }
-    .skill-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
-    .skill-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; line-height: 1.6; }
-    .skill-card .skill-meta {
-      margin-top: 10px; font-size: 0.78rem; color: var(--purple);
-      background: var(--purple-light); padding: 8px 12px; border-radius: var(--radius-sm);
-    }
-    .skill-card .btn { margin-top: 14px; }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-card:hover { box-shadow: 0 16px 48px rgba(91,143,168,0.16); transform: translateY(-8px); border-color: var(--sk-accent, #A8C4D4); }
+    .skill-card-inner { padding: 32px 28px 24px; flex: 1; display: flex; flex-direction: column; }
+    .skill-icon-wrap { position: relative; margin-bottom: 20px; }
+    .skill-icon-glow { position: absolute; inset: -12px; border-radius: 50%; background: var(--sk-accent, #A8C4D4); opacity: 0; filter: blur(24px); transition: opacity 0.4s ease; }
+    .skill-card:hover .skill-icon-glow { opacity: 0.15; }
+    .skill-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; position: relative; z-index: 1; transition: transform 0.3s ease; }
+    .skill-card:hover .skill-icon { transform: scale(1.08); }
+    .skill-name { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .skill-en-name { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 0.5px; font-weight: 400; }
+    .skill-value { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+    .skill-value strong { color: var(--text-primary); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .skill-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.73rem; font-weight: 500; background: var(--sk-tag-bg, #EDF4F8); color: var(--sk-accent, #5B8FA8); transition: all 0.25s ease; }
+    .skill-card:hover .skill-tag { transform: translateY(-1px); }
+    .skill-trigger { padding-top: 14px; border-top: 1px solid var(--border-light); display: flex; align-items: flex-start; gap: 8px; font-size: 0.76rem; color: var(--text-muted); }
+    .skill-trigger-icon { flex-shrink: 0; margin-top: 1px; }
+    .skill-trigger-text { line-height: 1.5; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; transition: all 0.3s ease; }
+    .skill-card:hover .skill-trigger-text { -webkit-line-clamp: unset; color: var(--text-secondary); }
+    .skill-detail-panel { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease; padding: 0 28px; background: var(--primary-lighter); border-top: 0 solid #D4E5EE; opacity: 0; }
+    .skill-card:hover .skill-detail-panel { max-height: 220px; padding: 20px 28px; border-top-width: 1px; opacity: 1; }
+    .skill-detail-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .skill-detail-col { flex: 1; min-width: 120px; }
+    .skill-detail-label { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .skill-detail-value { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+    .skill-card.card-matching { --sk-accent: #5B8FA8; --sk-tag-bg: #EDF4F8; }
+    .skill-card.card-hr { --sk-accent: #4CAF7C; --sk-tag-bg: #E8F6EE; }
+    .skill-card.card-recruit { --sk-accent: #9B8FD4; --sk-tag-bg: #EFEDF8; }
+    .skill-card.card-ranking { --sk-accent: #E8A838; --sk-tag-bg: #FDF3E2; }
+    .skill-card.card-teamops { --sk-accent: #E5655E; --sk-tag-bg: #FCEAE9; }
+    .connection-hint { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 32px 0 40px; color: var(--text-muted); font-size: 0.78rem; }
+    .connection-hint::before, .connection-hint::after { content: ''; width: 60px; height: 1px; background: #E2E8ED; }
+    .connection-dots { display: flex; gap: 6px; }
+    .connection-dots span { width: 6px; height: 6px; border-radius: 50%; background: #A8C4D4; animation: skPulse 1.8s ease-in-out infinite; }
+    .connection-dots span:nth-child(2) { animation-delay: 0.3s; }
+    .connection-dots span:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes skFadeIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes skPulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.6); } }
 
     /* ===================== 按钮 ===================== */
     .btn {
@@ -661,41 +698,232 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       流程：先用 WorkBuddy 设计初版，再用达尔文 / 盘古技能打磨优化、提升得分。
     </div>
-    <div class="grid">
-      <div class="skill-card">
-        <span class="tag">Skill ①</span>
-        <h3>智能招聘大师</h3>
-        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
-        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
-        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+
+    <div class="skills-showcase">
+      <!-- 连接线提示 -->
+      <div class="connection-hint">
+        <span class="connection-dots"><span></span><span></span><span></span></span>
+        Skills 展示区
+        <span class="connection-dots"><span></span><span></span><span></span></span>
       </div>
-      <div class="skill-card">
-        <span class="tag">Skill ②</span>
-        <h3>内部活水三维匹配引擎</h3>
-        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
-        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
-        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+
+      <div class="skills-grid cols-3">
+        <!-- Skill ①: 智能招聘大师 -->
+        <div class="skill-card card-recruit" onclick="openSkill('recruitment-expert')">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:#EFEDF8;color:#9B8FD4;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">智能招聘大师</div>
+            <div class="skill-en-name">AI Recruitment Expert</div>
+            <div class="skill-value">基于<strong>四维度匹配模型</strong>（技能匹配、经验匹配、文化匹配、潜力匹配），实现简历智能解析、JD自动生成、去偏见评分，将招聘评估从"感觉"转化为可量化、可复现的系统化流程。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">JD生成</span>
+              <span class="skill-tag">简历解析</span>
+              <span class="skill-tag">四维评分</span>
+              <span class="skill-tag">去偏见</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              <span class="skill-trigger-text">点击卡片查看在线效果展示、下载安装与源码</span>
+            </div>
+          </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输入</div>
+                <div class="skill-detail-value">职位描述 / 候选人简历</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输出</div>
+                <div class="skill-detail-value">四维度匹配评分报告</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">关联模块</div>
+                <div class="skill-detail-value">模块一 · 岗位匹配度测评</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill ②: 内部活水三维匹配引擎 -->
+        <div class="skill-card card-matching">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:#EDF4F8;color:#5B8FA8;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">内部活水三维匹配引擎</div>
+            <div class="skill-en-name">Internal Mobility 3D Matching Engine</div>
+            <div class="skill-value">基于<strong>能力、意愿、潜力</strong>三个维度，对内部候选人进行全方位评估与智能匹配，帮助企业实现人才内部流动的最优配置，降低外部招聘成本。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">三维匹配</span>
+              <span class="skill-tag">能力评估</span>
+              <span class="skill-tag">意愿分析</span>
+              <span class="skill-tag">潜力预测</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              <span class="skill-trigger-text">点击卡片查看详情</span>
+            </div>
+          </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输入</div>
+                <div class="skill-detail-value">员工档案 / 岗位需求</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输出</div>
+                <div class="skill-detail-value">三维匹配度报告 + 推荐排序</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">关联模块</div>
+                <div class="skill-detail-value">模块五 · 内部活水平台</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill ③: 外部人才市场数据参考 -->
+        <div class="skill-card card-ranking">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:#FDF3E2;color:#E8A838;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">外部人才市场数据参考</div>
+            <div class="skill-en-name">External Talent Market Intelligence</div>
+            <div class="skill-value">实时获取<strong>外部人才市场薪酬数据、供需趋势、岗位热度</strong>，为内部活水决策提供市场基准参考，确保内部调薪与外部市场保持竞争力。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">薪酬对标</span>
+              <span class="skill-tag">市场趋势</span>
+              <span class="skill-tag">供需分析</span>
+              <span class="skill-tag">岗位热度</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              <span class="skill-trigger-text">点击卡片查看详情</span>
+            </div>
+          </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输入</div>
+                <div class="skill-detail-value">岗位名称 / 行业 / 地区</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输出</div>
+                <div class="skill-detail-value">市场薪酬报告 + 供需分析</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">关联模块</div>
+                <div class="skill-detail-value">模块五 · 内部活水平台</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="skill-card">
-        <span class="tag">Skill ③</span>
-        <h3>外部人才市场数据参考</h3>
-        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
-        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
-        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
-      </div>
-      <div class="skill-card">
-        <span class="tag">Skill ④</span>
-        <h3>HR人力资源管理</h3>
-        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
-        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
-        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
-      </div>
-      <div class="skill-card">
-        <span class="tag">Skill ⑤</span>
-        <h3>活水竞争力排行榜</h3>
-        <p>该模块下的子问题：【填写】。输入/输出：【填写】。</p>
-        <div class="skill-meta">🔗 调用/关联（选填）：【选填】</div>
-        <a href="#" target="_blank" class="btn btn-purple btn-block">点此体验 →</a>
+
+      <div class="skills-grid cols-2">
+        <!-- Skill ④: HR人力资源管理 -->
+        <div class="skill-card card-hr">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:#E8F6EE;color:#4CAF7C;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">HR人力资源管理</div>
+            <div class="skill-en-name">HR Human Resource Management</div>
+            <div class="skill-value">覆盖<strong>员工全生命周期管理</strong>，包括入离职办理、合同管理、组织架构维护、员工档案管理等功能，为HR日常运营提供一站式数字化解决方案。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">员工管理</span>
+              <span class="skill-tag">合同管理</span>
+              <span class="skill-tag">组织架构</span>
+              <span class="skill-tag">入离职</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              <span class="skill-trigger-text">点击卡片查看详情</span>
+            </div>
+          </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输入</div>
+                <div class="skill-detail-value">员工信息 / 组织数据</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输出</div>
+                <div class="skill-detail-value">全生命周期管理报表</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">关联模块</div>
+                <div class="skill-detail-value">模块二/三 · HR智能咨询/合同管理</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill ⑤: 活水竞争力排行榜 -->
+        <div class="skill-card card-teamops">
+          <div class="skill-card-inner">
+            <div class="skill-icon-wrap">
+              <div class="skill-icon-glow"></div>
+              <div class="skill-icon" style="background:#FCEAE9;color:#E5655E;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+            </div>
+            <div class="skill-name">活水竞争力排行榜</div>
+            <div class="skill-en-name">Internal Mobility Competitiveness Ranking</div>
+            <div class="skill-value">基于<strong>综合评分算法</strong>，对内部活水候选人进行多维度竞争力排名，支持按部门、岗位、能力维度筛选排序，为管理者提供数据驱动的活水决策依据。</div>
+            <div class="skill-tags">
+              <span class="skill-tag">竞争力排名</span>
+              <span class="skill-tag">多维度排序</span>
+              <span class="skill-tag">数据看板</span>
+              <span class="skill-tag">决策支持</span>
+            </div>
+            <div class="skill-trigger">
+              <span class="skill-trigger-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              <span class="skill-trigger-text">点击卡片查看详情</span>
+            </div>
+          </div>
+          <div class="skill-detail-panel">
+            <div class="skill-detail-row">
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输入</div>
+                <div class="skill-detail-value">候选人数据 / 筛选条件</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">输出</div>
+                <div class="skill-detail-value">竞争力排行榜 + 数据看板</div>
+              </div>
+              <div class="skill-detail-col">
+                <div class="skill-detail-label">关联模块</div>
+                <div class="skill-detail-value">模块五 · 内部活水平台</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
